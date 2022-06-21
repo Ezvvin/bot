@@ -1,4 +1,4 @@
-package handler
+package commandimpl
 
 import (
 	"bot/internal/config"
@@ -7,7 +7,7 @@ import (
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
 )
 
-func BackButtonHandler(userMap map[int64]config.Location, bot *tgbotapi.BotAPI, update tgbotapi.Update) {
+func Back(userMap map[int64]config.Location, bot *tgbotapi.BotAPI, update tgbotapi.Update) {
 	switch userMap[update.Message.From.ID] {
 	case config.Location_HoodyCatalogMenu:
 		msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Вы вернулись в главное меню!")

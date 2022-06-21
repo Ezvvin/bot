@@ -1,6 +1,7 @@
 package handler
 
 import (
+	commandimpl "bot/internal/command_impl"
 	"bot/internal/config"
 	"log"
 
@@ -18,14 +19,9 @@ func Handler(bot *tgbotapi.BotAPI, updates tgbotapi.UpdatesChannel) {
 		}
 
 		switch update.Message.Text {
-		//TODO добавить команды
+		//TODO упростить команды
 		case "/start":
-			msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Hi, i'm  bot. Choose option:")
-			msg.ReplyMarkup = config.MainMenuKeyboard
-			if _, err := bot.Send(msg); err != nil {
-				log.Panic(err)
-			}
-			userMap[update.Message.From.ID] = config.Location_MainMenu
+			commandimpl.Start(userMap, bot, update)
 
 		case "/close":
 			log.Println("ВНИМАНИЕ СКРЫВАЕТСЯ КЛАВИАТУРА ТГ")
@@ -50,7 +46,7 @@ func Handler(bot *tgbotapi.BotAPI, updates tgbotapi.UpdatesChannel) {
 			userMap[update.Message.From.ID] = config.Location_HoodyMenu
 
 		case "Назад":
-			BackButtonHandler(userMap, bot, update)
+			commandimpl.Back(userMap, bot, update)
 
 		default:
 			msg := tgbotapi.NewMessage(update.Message.Chat.ID, "For start send `/start` in chat")
