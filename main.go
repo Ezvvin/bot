@@ -20,6 +20,7 @@ var numericKeyboard = tgbotapi.NewReplyKeyboard(
 	),
 )
 
+//Создаем бота
 func Main() {
 	bot, err := tgbotapi.NewBotAPI(os.Getenv("5437936243:AAG8qSRApD7V90ZZUVDM4ze0bcRbUC1rbrE"))
 	if err != nil {
@@ -29,17 +30,17 @@ func Main() {
 	bot.Debug = true
 
 	log.Printf("Authorized on account %s", bot.Self.UserName)
-
+	//Устанавливаем время обновления
 	u := tgbotapi.NewUpdate(0)
 	u.Timeout = 60
-
+	//Получаем обновления от бота
 	updates := bot.GetUpdatesChan(u)
 
 	for update := range updates {
 		if update.Message == nil {
 			continue
 		}
-
+		//Проверяем что от пользователья пришло именно текстовое сообщение
 		msg := tgbotapi.NewMessage(update.Message.Chat.ID, update.Message.Text)
 
 		switch update.Message.Text {
