@@ -50,23 +50,7 @@ func Handler(bot *tgbotapi.BotAPI, updates tgbotapi.UpdatesChannel) {
 			userMap[update.Message.From.ID] = config.Location_HoodyMenu
 
 		case "Назад":
-			switch userMap[update.Message.From.ID] {
-			case config.Location_HoodyCatalogMenu:
-				msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Вы вернулись в главное меню!")
-				msg.ReplyMarkup = config.MainMenuKeyboard
-				if _, err := bot.Send(msg); err != nil {
-					log.Panic(err)
-				}
-				userMap[update.Message.From.ID] = config.Location_MainMenu
-
-			case config.Location_HoodyMenu:
-				msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Вы вернулись в каталог!")
-				msg.ReplyMarkup = config.HoodyMenuKeyboard
-				if _, err := bot.Send(msg); err != nil {
-					log.Panic(err)
-				}
-				userMap[update.Message.From.ID] = config.Location_HoodyCatalogMenu
-			}
+			BackButtonHandler(userMap, bot, update)
 
 		default:
 			msg := tgbotapi.NewMessage(update.Message.Chat.ID, "For start send `/start` in chat")
