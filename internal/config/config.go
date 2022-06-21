@@ -31,3 +31,10 @@ var (
 		),
 	)
 )
+
+type Location string
+
+var (
+	Location_HoodyMenu Location = "HodyMenu"
+	Location_MainMenu  Location = "MainMenu"
+)

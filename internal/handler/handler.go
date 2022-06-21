@@ -8,12 +8,13 @@ import (
 )
 
 func Handler(bot *tgbotapi.BotAPI, updates tgbotapi.UpdatesChannel) {
-
+	// Проверяем каждое обновление
+	userMap := map[int64]config.Location{}
 	for update := range updates {
+		// Проверяем что сообщение не пустое
 		if update.Message == nil {
 			continue
 		}
-		//Проверяем что от пользователья пришло именно текстовое сообщение
 
 		switch update.Message.Text {
 		//TODO добавить команды
@@ -23,6 +24,7 @@ func Handler(bot *tgbotapi.BotAPI, updates tgbotapi.UpdatesChannel) {
 			if _, err := bot.Send(msg); err != nil {
 				log.Panic(err)
 			}
+			userMap[update.Message.From.ID] = config.Location_MainMenu
 
 		case "/close":
 			log.Println("ВНИМАНИЕ СКРЫВАЕТСЯ КЛАВИАТУРА ТГ")
@@ -37,6 +39,17 @@ func Handler(bot *tgbotapi.BotAPI, updates tgbotapi.UpdatesChannel) {
 			if _, err := bot.Send(msg); err != nil {
 				log.Panic(err)
 			}
+			userMap[update.Message.From.ID] = config.Location_HoodyMenu
+
+		case "Назад":
+			if userMap[update.Message.From.ID] == config.Location_HoodyMenu {
+				msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Вы вернулись в главное меню!")
+				msg.ReplyMarkup = config.MainMenuKeyboard
+				if _, err := bot.Send(msg); err != nil {
+					log.Panic(err)
+				}
+			}
+
 		default:
 			msg := tgbotapi.NewMessage(update.Message.Chat.ID, "For start send `/start` in chat")
 			msg.ReplyMarkup = config.StartKeyboard
