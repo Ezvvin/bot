@@ -8,7 +8,6 @@ import (
 
 var numericKeyboard = tgbotapi.NewReplyKeyboard(
 	tgbotapi.NewKeyboardButtonRow(
-		tgbotapi.NewKeyboardButton("/start"),
 		tgbotapi.NewKeyboardButton("/close"),
 	),
 	tgbotapi.NewKeyboardButtonRow(
@@ -37,18 +36,28 @@ func main() {
 			continue
 		}
 		//Проверяем что от пользователья пришло именно текстовое сообщение
-		msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Hi, i'm  bot.")
-		if _, err := bot.Send(msg); err != nil {
-			log.Panic(err)
-		}
 
 		switch update.Message.Text {
 		case "/start":
+			msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Hi, i'm  bot. Choose option:")
 			msg.ReplyMarkup = numericKeyboard
+			if _, err := bot.Send(msg); err != nil {
+				log.Panic(err)
+			}
 
 		case "/close":
 			log.Println("ВНИМАНИЕ СКРЫВАЕТСЯ КЛАВИАТУРА ТГ")
+			msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Bay! Have a nice day! If i need you again, send `/start` in the chat!")
 			msg.ReplyMarkup = tgbotapi.NewRemoveKeyboard(true)
+			if _, err := bot.Send(msg); err != nil {
+				log.Panic(err)
+			}
+
+		default:
+			msg := tgbotapi.NewMessage(update.Message.Chat.ID, "For start send `/start` in chat")
+			if _, err := bot.Send(msg); err != nil {
+				log.Panic(err)
+			}
 		}
 
 	}
