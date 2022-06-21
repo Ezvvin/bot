@@ -18,7 +18,7 @@ func init() {
 }
 
 func main() {
-
+	//TODO: Добавить адекватный логгер
 	log.Println(cfg)
 
 	// Подключаем бота
