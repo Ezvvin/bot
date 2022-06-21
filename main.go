@@ -36,7 +36,7 @@ func Main() {
 	updates := bot.GetUpdatesChan(u)
 
 	for update := range updates {
-		if update.Message == nil { // ignore non-Message updates
+		if update.Message == nil {
 			continue
 		}
 
@@ -53,4 +53,5 @@ func Main() {
 			log.Panic(err)
 		}
 	}
+	Main()
 }
