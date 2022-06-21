@@ -20,7 +20,7 @@ var numericKeyboard = tgbotapi.NewReplyKeyboard(
 	),
 )
 
-func main() {
+func Main() {
 	bot, err := tgbotapi.NewBotAPI(os.Getenv("5437936243:AAG8qSRApD7V90ZZUVDM4ze0bcRbUC1rbrE"))
 	if err != nil {
 		log.Panic(err)
