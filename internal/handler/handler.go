@@ -8,8 +8,9 @@ import (
 )
 
 func Handler(bot *tgbotapi.BotAPI, updates tgbotapi.UpdatesChannel) {
-	// Проверяем каждое обновление
 	userMap := map[int64]config.Location{}
+
+	// Проверяем каждое обновление
 	for update := range updates {
 		// Проверяем что сообщение не пустое
 		if update.Message == nil {
@@ -39,15 +40,32 @@ func Handler(bot *tgbotapi.BotAPI, updates tgbotapi.UpdatesChannel) {
 			if _, err := bot.Send(msg); err != nil {
 				log.Panic(err)
 			}
+			userMap[update.Message.From.ID] = config.Location_HoodyCatalogMenu
+		case "Black Neega":
+			msg := tgbotapi.NewMessage(update.Message.Chat.ID, "4500 рублей на стол")
+			msg.ReplyMarkup = config.BlackNeegaKeyboard
+			if _, err := bot.Send(msg); err != nil {
+				log.Panic(err)
+			}
 			userMap[update.Message.From.ID] = config.Location_HoodyMenu
 
 		case "Назад":
-			if userMap[update.Message.From.ID] == config.Location_HoodyMenu {
+			switch userMap[update.Message.From.ID] {
+			case config.Location_HoodyCatalogMenu:
 				msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Вы вернулись в главное меню!")
 				msg.ReplyMarkup = config.MainMenuKeyboard
 				if _, err := bot.Send(msg); err != nil {
 					log.Panic(err)
 				}
+				userMap[update.Message.From.ID] = config.Location_MainMenu
+
+			case config.Location_HoodyMenu:
+				msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Вы вернулись в каталог!")
+				msg.ReplyMarkup = config.HoodyMenuKeyboard
+				if _, err := bot.Send(msg); err != nil {
+					log.Panic(err)
+				}
+				userMap[update.Message.From.ID] = config.Location_HoodyCatalogMenu
 			}
 
 		default:
@@ -56,6 +74,7 @@ func Handler(bot *tgbotapi.BotAPI, updates tgbotapi.UpdatesChannel) {
 			if _, err := bot.Send(msg); err != nil {
 				log.Panic(err)
 			}
+			userMap[update.Message.From.ID] = config.Location_StartMenu
 		}
 
 	}
