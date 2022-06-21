@@ -8,9 +8,8 @@ import (
 
 var numericKeyboard = tgbotapi.NewReplyKeyboard(
 	tgbotapi.NewKeyboardButtonRow(
-		tgbotapi.NewKeyboardButton("ссылка"),
-		tgbotapi.NewKeyboardButton("голый максим"),
-		tgbotapi.NewKeyboardButton("худи"),
+		tgbotapi.NewKeyboardButton("/start"),
+		tgbotapi.NewKeyboardButton("/close"),
 	),
 	tgbotapi.NewKeyboardButtonRow(
 		tgbotapi.NewKeyboardButton("4"),
@@ -42,13 +41,14 @@ func main() {
 		if _, err := bot.Send(msg); err != nil {
 			log.Panic(err)
 		}
+
 		switch update.Message.Text {
-		case "open":
+		case "/start":
 			msg.ReplyMarkup = numericKeyboard
 
-		case "close":
-			log.Println("скрыть мать")
-			msg.ReplyMarkup = tgbotapi.NewRemoveKeyboard(false)
+		case "/close":
+			log.Println("ВНИМАНИЕ СКРЫВАЕТСЯ КЛАВИАТУРА ТГ")
+			msg.ReplyMarkup = tgbotapi.NewRemoveKeyboard(true)
 		}
 
 	}
