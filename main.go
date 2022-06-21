@@ -1,18 +1,10 @@
 package main
 
 import (
+	"bot/internal/handler"
 	"log"
 
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
-)
-
-var numericKeyboard = tgbotapi.NewReplyKeyboard(
-	tgbotapi.NewKeyboardButtonRow(
-		tgbotapi.NewKeyboardButton("/close"),
-	),
-	tgbotapi.NewKeyboardButtonRow(
-		tgbotapi.NewKeyboardButton("4"),
-	),
 )
 
 //Создаем бота
@@ -31,36 +23,5 @@ func main() {
 	u.Timeout = 60
 	//Получаем обновления от бота
 	updates := bot.GetUpdatesChan(u)
-
-	for update := range updates {
-		if update.Message == nil {
-			continue
-		}
-		//Проверяем что от пользователья пришло именно текстовое сообщение
-
-		switch update.Message.Text {
-		//TODO добавить команды
-		case "/start":
-			msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Hi, i'm  bot. Choose option:")
-			msg.ReplyMarkup = numericKeyboard
-			if _, err := bot.Send(msg); err != nil {
-				log.Panic(err)
-			}
-
-		case "/close":
-			log.Println("ВНИМАНИЕ СКРЫВАЕТСЯ КЛАВИАТУРА ТГ")
-			msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Bye! Have a nice day! If i need you again, send `/start` in the chat!")
-			msg.ReplyMarkup = tgbotapi.NewRemoveKeyboard(true)
-			if _, err := bot.Send(msg); err != nil {
-				log.Panic(err)
-			}
-
-		default:
-			msg := tgbotapi.NewMessage(update.Message.Chat.ID, "For start send `/start` in chat")
-			if _, err := bot.Send(msg); err != nil {
-				log.Panic(err)
-			}
-		}
-
-	}
+	handler.Handler(bot, updates)
 }
