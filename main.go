@@ -45,6 +45,8 @@ func Main() {
 		switch update.Message.Text {
 		case "open":
 			msg.ReplyMarkup = numericKeyboard
+			msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Hi, i'm  bot.")
+			bot.Send(msg)
 		case "close":
 			msg.ReplyMarkup = tgbotapi.NewRemoveKeyboard(true)
 		}
