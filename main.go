@@ -1,28 +1,25 @@
-package bot
+package main
 
 import (
 	"log"
-	"os"
 
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
 )
 
 var numericKeyboard = tgbotapi.NewReplyKeyboard(
 	tgbotapi.NewKeyboardButtonRow(
-		tgbotapi.NewKeyboardButton("1"),
-		tgbotapi.NewKeyboardButton("2"),
-		tgbotapi.NewKeyboardButton("3"),
+		tgbotapi.NewKeyboardButton("ссылка"),
+		tgbotapi.NewKeyboardButton("голый максим"),
+		tgbotapi.NewKeyboardButton("худи"),
 	),
 	tgbotapi.NewKeyboardButtonRow(
 		tgbotapi.NewKeyboardButton("4"),
-		tgbotapi.NewKeyboardButton("5"),
-		tgbotapi.NewKeyboardButton("6"),
 	),
 )
 
 //Создаем бота
-func Main() {
-	bot, err := tgbotapi.NewBotAPI(os.Getenv("5437936243:AAG8qSRApD7V90ZZUVDM4ze0bcRbUC1rbrE"))
+func main() {
+	bot, err := tgbotapi.NewBotAPI("5437936243:AAG8qSRApD7V90ZZUVDM4ze0bcRbUC1rbrE")
 	if err != nil {
 		log.Panic(err)
 	}
@@ -41,20 +38,18 @@ func Main() {
 			continue
 		}
 		//Проверяем что от пользователья пришло именно текстовое сообщение
-		msg := tgbotapi.NewMessage(update.Message.Chat.ID, update.Message.Text)
-
-		switch update.Message.Text {
-		case "open":
-			msg.ReplyMarkup = numericKeyboard
-			msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Hi, i'm  bot.")
-			bot.Send(msg)
-		case "close":
-			msg.ReplyMarkup = tgbotapi.NewRemoveKeyboard(true)
-		}
-
+		msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Hi, i'm  bot.")
 		if _, err := bot.Send(msg); err != nil {
 			log.Panic(err)
 		}
+		switch update.Message.Text {
+		case "open":
+			msg.ReplyMarkup = numericKeyboard
+
+		case "close":
+			log.Println("скрыть мать")
+			msg.ReplyMarkup = tgbotapi.NewRemoveKeyboard(false)
+		}
+
 	}
-	Main()
 }
