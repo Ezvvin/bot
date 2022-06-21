@@ -17,7 +17,8 @@ var numericKeyboard = tgbotapi.NewReplyKeyboard(
 
 //Создаем бота
 func main() {
-	bot, err := tgbotapi.NewBotAPI("5437936243:AAG8qSRApD7V90ZZUVDM4ze0bcRbUC1rbrE")
+	bot, err := tgbotapi.NewBotAPI("5437936243:AAG8qSRApD7V90ZZUVDM4ze0bcRbUC1rbrE") //TODO скрыть ебаный токен
+
 	if err != nil {
 		log.Panic(err)
 	}
@@ -38,6 +39,7 @@ func main() {
 		//Проверяем что от пользователья пришло именно текстовое сообщение
 
 		switch update.Message.Text {
+		//TODO добавить команды
 		case "/start":
 			msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Hi, i'm  bot. Choose option:")
 			msg.ReplyMarkup = numericKeyboard
@@ -47,7 +49,7 @@ func main() {
 
 		case "/close":
 			log.Println("ВНИМАНИЕ СКРЫВАЕТСЯ КЛАВИАТУРА ТГ")
-			msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Bay! Have a nice day! If i need you again, send `/start` in the chat!")
+			msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Bye! Have a nice day! If i need you again, send `/start` in the chat!")
 			msg.ReplyMarkup = tgbotapi.NewRemoveKeyboard(true)
 			if _, err := bot.Send(msg); err != nil {
 				log.Panic(err)
