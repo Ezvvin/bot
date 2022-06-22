@@ -31,6 +31,9 @@ func Handler(bot *tgbotapi.BotAPI, updates tgbotapi.UpdatesChannel) {
 		case "Black Hoodie":
 			commandimpl.BlackHoodieCommand(userMap, bot, update)
 
+		case "White Hoodie":
+			commandimpl.WhiteHoodieCommand(userMap, bot, update)
+
 		case "Назад":
 			commandimpl.Back(userMap, bot, update)
 

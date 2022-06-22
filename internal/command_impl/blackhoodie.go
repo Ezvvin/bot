@@ -13,6 +13,6 @@ func BlackHoodieCommand(userMap map[int64]domain.Location, bot *tgbotapi.BotAPI,
 	if _, err := bot.Send(msg); err != nil {
 		log.Panic(err)
 	}
-	userMap[update.Message.From.ID] = domain.Location_HoodyMenu
+	userMap[update.Message.From.ID] = domain.Location_BlackHoodyMenu
 
 }

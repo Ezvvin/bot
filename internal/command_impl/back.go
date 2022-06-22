@@ -17,12 +17,21 @@ func Back(userMap map[int64]domain.Location, bot *tgbotapi.BotAPI, update tgbota
 		}
 		userMap[update.Message.From.ID] = domain.Location_MainMenu
 
-	case domain.Location_HoodyMenu:
+	case domain.Location_BlackHoodyMenu:
 		msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Вы вернулись в каталог!")
 		msg.ReplyMarkup = domain.HoodyMenuKeyboard
 		if _, err := bot.Send(msg); err != nil {
 			log.Panic(err)
 		}
 		userMap[update.Message.From.ID] = domain.Location_HoodyCatalogMenu
+
+	case domain.Location_WhiteHoodyMenu:
+		msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Вы вернулись в каталог!")
+		msg.ReplyMarkup = domain.HoodyMenuKeyboard
+		if _, err := bot.Send(msg); err != nil {
+			log.Panic(err)
+		}
+		userMap[update.Message.From.ID] = domain.Location_HoodyCatalogMenu
+
 	}
 }
