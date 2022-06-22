@@ -19,10 +19,10 @@ var (
 	)
 	HoodyMenuKeyboard = tgbotapi.NewReplyKeyboard(
 		tgbotapi.NewKeyboardButtonRow(
-			tgbotapi.NewKeyboardButton("Black Neega"),
+			tgbotapi.NewKeyboardButton("Black Hoodie"),
 		),
 		tgbotapi.NewKeyboardButtonRow(
-			tgbotapi.NewKeyboardButton("White Hodak"),
+			tgbotapi.NewKeyboardButton("White Hoodie"),
 		),
 		tgbotapi.NewKeyboardButtonRow(
 			tgbotapi.NewKeyboardButton("Назад"),

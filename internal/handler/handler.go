@@ -24,12 +24,8 @@ func Handler(bot *tgbotapi.BotAPI, updates tgbotapi.UpdatesChannel) {
 			commandimpl.Start(userMap, bot, update)
 
 		case "/close":
-			log.Println("ВНИМАНИЕ СКРЫВАЕТСЯ КЛАВИАТУРА ТГ")
-			msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Bye! Have a nice day! If i need you again, send `/start` in the chat!")
-			msg.ReplyMarkup = tgbotapi.NewRemoveKeyboard(true)
-			if _, err := bot.Send(msg); err != nil {
-				log.Panic(err)
-			}
+			commandimpl.Close(bot, update)
+			
 		case "Каталог одежды":
 			msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Выберите худи")
 			msg.ReplyMarkup = domain.HoodyMenuKeyboard
@@ -37,8 +33,8 @@ func Handler(bot *tgbotapi.BotAPI, updates tgbotapi.UpdatesChannel) {
 				log.Panic(err)
 			}
 			userMap[update.Message.From.ID] = domain.Location_HoodyCatalogMenu
-		case "Black Neega":
-			msg := tgbotapi.NewMessage(update.Message.Chat.ID, "4500 рублей на стол")
+		case "Black Hoodie":
+			msg := tgbotapi.NewMessage(update.Message.Chat.ID, "4500 рублей")
 			msg.ReplyMarkup = domain.BlackNeegaKeyboard
 			if _, err := bot.Send(msg); err != nil {
 				log.Panic(err)
