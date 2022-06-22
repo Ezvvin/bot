@@ -9,7 +9,7 @@ import (
 
 func BlackHoodieCommand(userMap map[int64]domain.Location, bot *tgbotapi.BotAPI, update tgbotapi.Update) {
 	msg := tgbotapi.NewMessage(update.Message.Chat.ID, "4500 рублей")
-	msg.ReplyMarkup = domain.BlackNeegaKeyboard
+	msg.ReplyMarkup = domain.BuyHoodieKeyboard
 	if _, err := bot.Send(msg); err != nil {
 		log.Panic(err)
 	}

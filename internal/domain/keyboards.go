@@ -28,7 +28,7 @@ var (
 			tgbotapi.NewKeyboardButton("Назад"),
 		),
 	)
-	BlackNeegaKeyboard = tgbotapi.NewReplyKeyboard(
+	BuyHoodieKeyboard = tgbotapi.NewReplyKeyboard(
 		tgbotapi.NewKeyboardButtonRow(
 			tgbotapi.NewKeyboardButton("Купить"),
 		),
