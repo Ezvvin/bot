@@ -1,5 +1,7 @@
 package pictures
 
+// TODO: Перенеси картинки в `bot/src/pictures`
+
 // import (
 // 	"io/ioutil"
 

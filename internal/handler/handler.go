@@ -18,7 +18,6 @@ func Handler(bot *tgbotapi.BotAPI, updates tgbotapi.UpdatesChannel) {
 		}
 
 		switch update.Message.Text {
-		//TODO упростить команды
 		case "/start":
 			commandimpl.Start(userMap, bot, update)
 
