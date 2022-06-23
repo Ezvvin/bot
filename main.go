@@ -2,36 +2,40 @@ package main
 
 import (
 	"bot/internal/config"
+	"bot/internal/domain"
 	"bot/internal/handler"
-	"log"
+	"bot/internal/logger"
 
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
 	"github.com/jinzhu/configor"
+	log "github.com/sirupsen/logrus"
 )
 
 var cfg config.Config
 
 func init() {
 	if err := configor.Load(&cfg, "config.yaml"); err != nil {
-		log.Fatalf("Couldn't load config, err: '%s'", err.Error())
+		log.WithError(err).Fatal(domain.LoggerConfigError)
 	}
 }
 
 func main() {
-	//TODO: Добавить адекватный логгер
-	log.Println(cfg)
+	// Иницилизация логгера
+	logger.InitLogger()
+	// Установка уровня логгера
+	log.SetLevel(logger.ParseLogLevel(cfg))
 
 	// TODO: Переместить создание бота в отдельный пакет с собственной структурой
 	// Подключаем бота
 	bot, err := tgbotapi.NewBotAPI(cfg.Token) //TODO скрыть ебаный токен
 	if err != nil {
-		log.Panic(err)
+		log.WithError(err).Fatal(domain.TelegramBotError_Init)
 	}
 
 	// Высставляем боту дебаг
 	bot.Debug = true
 
-	log.Printf("Authorized on account %s", bot.Self.UserName)
+	log.WithField("Bot name", bot.Self.UserName).Debug("Authorized on account")
 
 	//Устанавливаем время обновления
 	u := tgbotapi.NewUpdate(0)
