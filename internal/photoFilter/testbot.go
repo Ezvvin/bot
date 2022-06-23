@@ -9,7 +9,7 @@ import (
 )
 
 func getBot(t *testing.T) (*tgbotapi.BotAPI, error) {
-	bot, err := tgbotapi.NewBotAPI("5437936243:AAG8qSRApD7V90ZZUVDM4ze0bcRbUC1rbrE")
+	bot, err := tgbotapi.NewBotAPI("")
 	bot.Debug = true
 
 	if err != nil {
