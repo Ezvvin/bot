@@ -3,6 +3,7 @@ package domain
 import tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
 
 var (
+	// Главное меню
 	MainMenuKeyboard = tgbotapi.NewReplyKeyboard(
 		tgbotapi.NewKeyboardButtonRow(
 			tgbotapi.NewKeyboardButton("Каталог одежды"),
@@ -24,11 +25,13 @@ var (
 			tgbotapi.NewKeyboardButton("Наш Instagram(не работает)"),
 		),
 	)
+	// Стартовая меню
 	StartKeyboard = tgbotapi.NewReplyKeyboard(
 		tgbotapi.NewKeyboardButtonRow(
 			tgbotapi.NewKeyboardButton("/start"),
 		),
 	)
+	// Меню выбора худи
 	HoodyMenuKeyboard = tgbotapi.NewReplyKeyboard(
 		tgbotapi.NewKeyboardButtonRow(
 			tgbotapi.NewKeyboardButton("Black Hoodie"),
@@ -40,6 +43,7 @@ var (
 			tgbotapi.NewKeyboardButton("Назад"),
 		),
 	)
+	// Меню покупки худи
 	BuyHoodieKeyboard = tgbotapi.NewReplyKeyboard(
 		tgbotapi.NewKeyboardButtonRow(
 			tgbotapi.NewKeyboardButton("Купить"),

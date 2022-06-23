@@ -5,6 +5,6 @@ import (
 )
 
 var (
-	LoggerConfigError     error = fmt.Errorf("Logger config error")
-	TelegramBotError_Init error = fmt.Errorf("Telegram Bot init error")
+	LoggerConfigError     error = fmt.Errorf("logger config error")
+	TelegramBotError_Init error = fmt.Errorf("telegram Bot init error")
 )
