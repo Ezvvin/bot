@@ -1,4 +1,4 @@
-package handler
+package telegrambot
 
 import (
 	commandimpl "bot/internal/command_impl"

@@ -3,8 +3,8 @@ package main
 import (
 	"bot/internal/config"
 	"bot/internal/domain"
-	"bot/internal/handler"
 	"bot/internal/logger"
+	tbot "bot/internal/telegram_bot"
 
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
 	"github.com/jinzhu/configor"
@@ -43,5 +43,5 @@ func main() {
 
 	//Получаем обновления от бота
 	updates := bot.GetUpdatesChan(u)
-	handler.Handler(bot, updates)
+	tbot.Handler(bot, updates)
 }
