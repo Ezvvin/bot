@@ -1,7 +1,6 @@
 package main
 
 import (
-	"bot/internal/config"
 	"bot/internal/domain"
 	"bot/internal/logger"
 	tbot "bot/internal/telegram_bot"
@@ -11,7 +10,7 @@ import (
 	log "github.com/sirupsen/logrus"
 )
 
-var cfg config.Config
+var cfg domain.Config
 
 func init() {
 	if err := configor.Load(&cfg, "config.yaml"); err != nil {

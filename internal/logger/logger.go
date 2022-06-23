@@ -1,7 +1,7 @@
 package logger
 
 import (
-	"bot/internal/config"
+	"bot/internal/domain"
 	"fmt"
 	"path"
 	"runtime"
@@ -25,7 +25,7 @@ func InitLogger() {
 }
 
 // ParseLogLevel - Функция для парсинга уровня логгера.
-func ParseLogLevel(cfg config.Config) log.Level {
+func ParseLogLevel(cfg domain.Config) log.Level {
 	level, err := log.ParseLevel(cfg.LogLevel)
 	if err != nil {
 		log.Fatal("Level parse error: ", err)
