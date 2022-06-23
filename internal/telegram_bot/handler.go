@@ -1,8 +1,8 @@
 package telegrambot
 
 import (
-	commandimpl "bot/internal/command_impl"
 	"bot/internal/domain"
+	commandimpl "bot/internal/telegram_bot/command_impl"
 
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
 	"github.com/sirupsen/logrus"
