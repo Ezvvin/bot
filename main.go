@@ -43,5 +43,5 @@ func main() {
 
 	//Получаем обновления от бота
 	updates := bot.GetUpdatesChan(u)
-	tbot.Handler(bot, updates)
+	tbot.InitHandler(bot, updates)
 }

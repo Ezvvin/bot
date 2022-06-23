@@ -5,9 +5,12 @@ import (
 	"bot/internal/domain"
 
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
+	"github.com/sirupsen/logrus"
 )
 
-func Handler(bot *tgbotapi.BotAPI, updates tgbotapi.UpdatesChannel) {
+func InitHandler(bot *tgbotapi.BotAPI, updates tgbotapi.UpdatesChannel) {
+	logrus.Debug("Init bot handler")
+	// Создаем мапу для отслеживания локации пользователя
 	userMap := map[int64]domain.Location{}
 
 	// Проверяем каждое обновление
