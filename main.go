@@ -21,6 +21,7 @@ func main() {
 	//TODO: Добавить адекватный логгер
 	log.Println(cfg)
 
+	// TODO: Переместить создание бота в отдельный пакет с собственной структурой
 	// Подключаем бота
 	bot, err := tgbotapi.NewBotAPI(cfg.Token) //TODO скрыть ебаный токен
 	if err != nil {
