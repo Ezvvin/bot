@@ -4,12 +4,12 @@ import (
 	"bot/internal/domain"
 	commandimpl "bot/internal/telegram_bot/command_impl"
 
-	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
 	"github.com/sirupsen/logrus"
 )
 
-func InitHandler(bot *tgbotapi.BotAPI, updates tgbotapi.UpdatesChannel) {
+func (bot *Telegrambot) InitHandler() {
 	logrus.Debug("Init bot handler")
+	updates := bot.Bot.GetUpdatesChan(bot.UpdateCfg)
 	// Создаем мапу для отслеживания локации пользователя
 	userMap := map[int64]domain.Location{}
 
@@ -22,25 +22,25 @@ func InitHandler(bot *tgbotapi.BotAPI, updates tgbotapi.UpdatesChannel) {
 
 		switch update.Message.Text {
 		case "/start":
-			commandimpl.Start(userMap, bot, update)
+			commandimpl.Start(userMap, bot.Bot, update)
 
 		case "/close":
-			commandimpl.Close(bot, update)
+			commandimpl.Close(bot.Bot, update)
 
 		case "Каталог одежды":
-			commandimpl.Catalog(userMap, bot, update)
+			commandimpl.Catalog(userMap, bot.Bot, update)
 
 		case "Black Hoodie":
-			commandimpl.BlackHoodieCommand(userMap, bot, update)
+			commandimpl.BlackHoodieCommand(userMap, bot.Bot, update)
 
 		case "White Hoodie":
-			commandimpl.WhiteHoodieCommand(userMap, bot, update)
+			commandimpl.WhiteHoodieCommand(userMap, bot.Bot, update)
 
 		case "Назад":
-			commandimpl.Back(userMap, bot, update)
+			commandimpl.Back(userMap, bot.Bot, update)
 
 		default:
-			commandimpl.Undefined(userMap, bot, update)
+			commandimpl.Undefined(userMap, bot.Bot, update)
 		}
 
 	}

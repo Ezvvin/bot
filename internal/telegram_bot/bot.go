@@ -1,3 +1,31 @@
 package telegrambot
 
-// TODO: Перенеси сюда бота и создай для него структуру
+import (
+	"bot/internal/domain"
+
+	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
+	log "github.com/sirupsen/logrus"
+)
+
+type Telegrambot struct {
+	Bot       *tgbotapi.BotAPI
+	UpdateCfg tgbotapi.UpdateConfig
+}
+
+func InitBot(cfg domain.BotConfig) (*Telegrambot, error) {
+	// Создание бота
+	bot, err := tgbotapi.NewBotAPI(cfg.Token)
+	if err != nil {
+		return nil, err
+	}
+
+	// Высставляем боту дебаг
+	bot.Debug = cfg.Debug
+
+	log.WithField("Bot name", bot.Self.UserName).Debug("Authorized on account")
+
+	//Устанавливаем время обновления
+	u := tgbotapi.NewUpdate(0)
+	u.Timeout = cfg.Timeout
+	return &Telegrambot{Bot: bot, UpdateCfg: u}, nil
+}

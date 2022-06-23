@@ -1,6 +1,11 @@
 package domain
 
 type Config struct {
-	Token    string `default:""`
-	LogLevel string `default:"DEBUG"`
+	LogLevel  string `default:"DEBUG"`
+	BotConfig BotConfig
+}
+type BotConfig struct {
+	Token   string `default:""`
+	Timeout int    `default:"60"`
+	Debug   bool   `default:"false"`
 }
