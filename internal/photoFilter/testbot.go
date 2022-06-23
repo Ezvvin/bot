@@ -1,4 +1,4 @@
-package pictures
+package photoFilter
 
 import (
 	"io/ioutil"
