@@ -1,4 +1,4 @@
-package photoFilter
+package photo_filter
 
 // import (
 // 	"io/ioutil"

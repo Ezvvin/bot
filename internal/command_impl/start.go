@@ -8,7 +8,7 @@ import (
 )
 
 func Start(userMap map[int64]domain.Location, bot *tgbotapi.BotAPI, update tgbotapi.Update) {
-	msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Hi, i'm  bot. Choose option:")
+	msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Добро пожаловать в наш магазин одежды  'LÚQ' 👋")
 	msg.ReplyMarkup = domain.MainMenuKeyboard
 	if _, err := bot.Send(msg); err != nil {
 		log.Panic(err)

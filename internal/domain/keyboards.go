@@ -9,7 +9,19 @@ var (
 		),
 
 		tgbotapi.NewKeyboardButtonRow(
-			tgbotapi.NewKeyboardButton("/close"),
+			tgbotapi.NewKeyboardButton("Задать вопрос(не работает)"),
+		),
+
+		tgbotapi.NewKeyboardButtonRow(
+			tgbotapi.NewKeyboardButton("Отзывы(не работает)"),
+		),
+
+		tgbotapi.NewKeyboardButtonRow(
+			tgbotapi.NewKeyboardButton("Наш Вконтакте(не работает)"),
+		),
+
+		tgbotapi.NewKeyboardButtonRow(
+			tgbotapi.NewKeyboardButton("Наш Instagram(не работает)"),
 		),
 	)
 	StartKeyboard = tgbotapi.NewReplyKeyboard(
