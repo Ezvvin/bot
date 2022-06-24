@@ -7,22 +7,17 @@ var (
 	MainMenuKeyboard = tgbotapi.NewReplyKeyboard(
 		tgbotapi.NewKeyboardButtonRow(
 			tgbotapi.NewKeyboardButton("Каталог одежды"),
-		),
-
-		tgbotapi.NewKeyboardButtonRow(
-			tgbotapi.NewKeyboardButton("Задать вопрос(не работает)"),
-		),
-
-		tgbotapi.NewKeyboardButtonRow(
 			tgbotapi.NewKeyboardButton("Отзывы(не работает)"),
 		),
-
+		
 		tgbotapi.NewKeyboardButtonRow(
 			tgbotapi.NewKeyboardButton("Наш Вконтакте(не работает)"),
-		),
-
-		tgbotapi.NewKeyboardButtonRow(
 			tgbotapi.NewKeyboardButton("Наш Instagram(не работает)"),
+		),
+		tgbotapi.NewKeyboardButtonRow(
+			tgbotapi.NewKeyboardButton("Задать вопрос(не работает)"),
+			tgbotapi.NewKeyboardButton("⌨️"),
+			
 		),
 	)
 	// Стартовая меню
