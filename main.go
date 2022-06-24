@@ -13,7 +13,7 @@ var cfg domain.Config
 
 func init() {
 	if err := configor.Load(&cfg, "config.yaml"); err != nil {
-		log.WithError(err).Fatal(domain.LoggerConfigError)
+		log.WithError(err).Fatal(domain.ErrLogger_Config)
 	}
 }
 
@@ -26,7 +26,7 @@ func main() {
 	// Подключаем бота
 	bot, err := telegrambot.InitBot(cfg.BotConfig)
 	if err != nil {
-		log.WithError(err).Fatal(domain.TelegramBotError_Init)
+		log.WithError(err).Fatal(domain.ErrTelegramBot_Init)
 	}
 
 	//Получаем обновления от бота
