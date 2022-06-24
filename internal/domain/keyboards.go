@@ -9,7 +9,7 @@ var (
 			tgbotapi.NewKeyboardButton("Каталог одежды"),
 			tgbotapi.NewKeyboardButton("Отзывы(не работает)"),
 		),
-		
+
 		tgbotapi.NewKeyboardButtonRow(
 			tgbotapi.NewKeyboardButton("Наш Вконтакте(не работает)"),
 			tgbotapi.NewKeyboardButton("Наш Instagram(не работает)"),
@@ -17,7 +17,6 @@ var (
 		tgbotapi.NewKeyboardButtonRow(
 			tgbotapi.NewKeyboardButton("Задать вопрос(не работает)"),
 			tgbotapi.NewKeyboardButton("⌨️"),
-			
 		),
 	)
 	// Стартовая меню
@@ -43,6 +42,12 @@ var (
 		tgbotapi.NewKeyboardButtonRow(
 			tgbotapi.NewKeyboardButton("Купить"),
 		),
+		tgbotapi.NewKeyboardButtonRow(
+			tgbotapi.NewKeyboardButton("Назад"),
+		),
+	)
+
+	CommendsKeyboard = tgbotapi.NewReplyKeyboard(
 		tgbotapi.NewKeyboardButtonRow(
 			tgbotapi.NewKeyboardButton("Назад"),
 		),
