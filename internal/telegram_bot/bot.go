@@ -29,3 +29,11 @@ func InitBot(cfg domain.BotConfig) (*Telegrambot, error) {
 	u.Timeout = cfg.Timeout
 	return &Telegrambot{Bot: bot, UpdateCfg: u}, nil
 }
+
+// func (bot *Telegrambot) SendPhoto() {
+// 	image := tgbotapi.NewPhoto(5437936243, tgbotapi.FilePath("../../src/picturies/white_hoodie/whitehoodie.jpg"))
+// 	_, err := bot.Bot.Send(image)
+
+// 	if err != nil {
+// 		panic(err)
+// 	}

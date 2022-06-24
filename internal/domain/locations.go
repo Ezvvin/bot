@@ -8,4 +8,5 @@ var (
 	Location_StartMenu        Location = "StartMenu"
 	Location_BlackHoodyMenu   Location = "BlackHoodyMenu"
 	Location_WhiteHoodyMenu   Location = "WhiteHoodyMenu"
+	Location_Commends         Location = "Commends"
 )
