@@ -3,6 +3,7 @@ package commandimpl
 import (
 	"bot/internal/domain"
 	"fmt"
+
 	log "github.com/sirupsen/logrus"
 
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"

@@ -7,7 +7,7 @@ var (
 	MainMenuKeyboard = tgbotapi.NewReplyKeyboard(
 		tgbotapi.NewKeyboardButtonRow(
 			tgbotapi.NewKeyboardButton("Каталог одежды"),
-			tgbotapi.NewKeyboardButton("Отзывы(не работает)"),
+			tgbotapi.NewKeyboardButton("Отзывы🔥"),
 		),
 
 		tgbotapi.NewKeyboardButtonRow(
