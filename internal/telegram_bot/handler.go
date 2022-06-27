@@ -27,16 +27,16 @@ func (bot *Telegrambot) InitHandler() {
 		case "⌨️":
 			commandimpl.Close(bot.Bot, update)
 
-		case "Каталог одежды":
+		case "Каталог одежды🥼":
 			commandimpl.Catalog(userMap, bot.Bot, update)
 
-		case "Black Hoodie":
+		case "🖤Black Hoodie🖤":
 			commandimpl.BlackHoodieCommand(userMap, bot.Bot, update)
 
-		case "White Hoodie":
+		case "🤍White Hoodie🤍":
 			commandimpl.WhiteHoodieCommand(userMap, bot.Bot, update)
 
-		case "Назад":
+		case "◀️Назад":
 			commandimpl.Back(userMap, bot.Bot, update)
 
 		case "Отзывы🔥":

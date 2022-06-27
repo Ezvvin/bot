@@ -6,16 +6,16 @@ var (
 	// Главное меню
 	MainMenuKeyboard = tgbotapi.NewReplyKeyboard(
 		tgbotapi.NewKeyboardButtonRow(
-			tgbotapi.NewKeyboardButton("Каталог одежды"),
+			tgbotapi.NewKeyboardButton("Каталог одежды🥼"),
 			tgbotapi.NewKeyboardButton("Отзывы🔥"),
 		),
 
 		tgbotapi.NewKeyboardButtonRow(
-			tgbotapi.NewKeyboardButton("Наш Вконтакте(не работает)"),
-			tgbotapi.NewKeyboardButton("Наш Instagram(не работает)"),
+			tgbotapi.NewKeyboardButton("Наш Вконтакте"),
+			tgbotapi.NewKeyboardButton("Наш Instagram"),
 		),
 		tgbotapi.NewKeyboardButtonRow(
-			tgbotapi.NewKeyboardButton("Задать вопрос(не работает)"),
+			tgbotapi.NewKeyboardButton("Вопрос/Ответ❓ ❗️"),
 			tgbotapi.NewKeyboardButton("⌨️"),
 		),
 	)
@@ -28,13 +28,13 @@ var (
 	// Меню выбора худи
 	HoodyMenuKeyboard = tgbotapi.NewReplyKeyboard(
 		tgbotapi.NewKeyboardButtonRow(
-			tgbotapi.NewKeyboardButton("Black Hoodie"),
+			tgbotapi.NewKeyboardButton("🖤Black Hoodie🖤"),
 		),
 		tgbotapi.NewKeyboardButtonRow(
-			tgbotapi.NewKeyboardButton("White Hoodie"),
+			tgbotapi.NewKeyboardButton("🤍White Hoodie🤍"),
 		),
 		tgbotapi.NewKeyboardButtonRow(
-			tgbotapi.NewKeyboardButton("Назад"),
+			tgbotapi.NewKeyboardButton("◀️Назад"),
 		),
 	)
 	// Меню покупки худи
@@ -43,13 +43,13 @@ var (
 			tgbotapi.NewKeyboardButton("Купить"),
 		),
 		tgbotapi.NewKeyboardButtonRow(
-			tgbotapi.NewKeyboardButton("Назад"),
+			tgbotapi.NewKeyboardButton("◀️Назад"),
 		),
 	)
 
 	CommendsKeyboard = tgbotapi.NewReplyKeyboard(
 		tgbotapi.NewKeyboardButtonRow(
-			tgbotapi.NewKeyboardButton("Назад"),
+			tgbotapi.NewKeyboardButton("◀️Назад"),
 		),
 	)
 )
