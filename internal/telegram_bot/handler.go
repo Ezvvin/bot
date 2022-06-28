@@ -24,9 +24,6 @@ func (bot *Telegrambot) InitHandler() {
 		case "/start":
 			commandimpl.Start(userMap, bot.Bot, update)
 
-		case "⌨️":
-			commandimpl.Close(bot.Bot, update)
-
 		case "Каталог одежды🥼":
 			commandimpl.Catalog(userMap, bot.Bot, update)
 
@@ -36,11 +33,14 @@ func (bot *Telegrambot) InitHandler() {
 		case "🤍White Hoodie🤍":
 			commandimpl.WhiteHoodieCommand(userMap, bot.Bot, update)
 
+		case "Отзывы🔥":
+			commandimpl.Commends(userMap, bot.Bot, update)
+
 		case "◀️Назад":
 			commandimpl.Back(userMap, bot.Bot, update)
 
-		case "Отзывы🔥":
-			commandimpl.Commends(userMap, bot.Bot, update)
+		case "⌨️":
+			commandimpl.Close(bot.Bot, update)
 
 		default:
 			commandimpl.Undefined(userMap, bot.Bot, update)

@@ -15,7 +15,7 @@ var (
 			tgbotapi.NewKeyboardButton("Наш Instagram"),
 		),
 		tgbotapi.NewKeyboardButtonRow(
-			tgbotapi.NewKeyboardButton("Вопрос/Ответ❓ ❗️"),
+			tgbotapi.NewKeyboardButton("Вопрос/Ответ❓❗️"),
 			tgbotapi.NewKeyboardButton("⌨️"),
 		),
 	)
