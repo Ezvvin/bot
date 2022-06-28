@@ -18,7 +18,7 @@ func Back(userMap map[int64]domain.Location, bot *tgbotapi.BotAPI, update tgbota
 		}
 		userMap[update.Message.From.ID] = domain.Location_MainMenu
 
-	case domain.Location_BlackHoodyMenu:
+	case domain.Location_HoodyColorMenu:
 		msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Вы вернулись в каталог!")
 		msg.ReplyMarkup = domain.HoodyMenuKeyboard
 		if _, err := bot.Send(msg); err != nil {
@@ -26,7 +26,7 @@ func Back(userMap map[int64]domain.Location, bot *tgbotapi.BotAPI, update tgbota
 		}
 		userMap[update.Message.From.ID] = domain.Location_HoodyCatalogMenu
 
-	case domain.Location_WhiteHoodyMenu:
+	case domain.Location_HoodyColorMenu:
 		msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Вы вернулись в каталог!")
 		msg.ReplyMarkup = domain.HoodyMenuKeyboard
 		if _, err := bot.Send(msg); err != nil {

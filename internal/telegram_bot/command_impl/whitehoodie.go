@@ -23,6 +23,6 @@ func WhiteHoodieCommand(userMap map[int64]domain.Location, bot *tgbotapi.BotAPI,
 	if err != nil {
 		log.WithError(err).Errorf(domain.ErrCommand_Init.Error(), "whitehoodie")
 	}
-	userMap[update.Message.From.ID] = domain.Location_WhiteHoodyMenu
+	userMap[update.Message.From.ID] = domain.Location_HoodyColorMenu
 
 }

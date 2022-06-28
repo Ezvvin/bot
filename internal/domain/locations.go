@@ -6,7 +6,6 @@ var (
 	Location_HoodyCatalogMenu Location = "HoodyCatalogMenu"
 	Location_MainMenu         Location = "MainMenu"
 	Location_StartMenu        Location = "StartMenu"
-	Location_BlackHoodyMenu   Location = "BlackHoodyMenu"
-	Location_WhiteHoodyMenu   Location = "WhiteHoodyMenu"
+	Location_HoodyColorMenu   Location = "HoodyColorMenu"
 	Location_Commends         Location = "Commends"
 )
