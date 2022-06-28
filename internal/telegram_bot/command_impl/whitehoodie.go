@@ -21,7 +21,7 @@ func WhiteHoodieCommand(userMap map[int64]domain.Location, bot *tgbotapi.BotAPI,
 	_, err := bot.SendMediaGroup(image)
 
 	if err != nil {
-		log.WithError(err).Panic(domain.ErrCommand_Init)
+		log.WithError(err).Errorf(domain.ErrCommand_Init.Error(), "whitehoodie")
 	}
 	userMap[update.Message.From.ID] = domain.Location_WhiteHoodyMenu
 

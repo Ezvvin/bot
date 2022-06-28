@@ -11,7 +11,7 @@ func BlackHoodieCommand(userMap map[int64]domain.Location, bot *tgbotapi.BotAPI,
 	msg := tgbotapi.NewMessage(update.Message.Chat.ID, "4500 рублей")
 	msg.ReplyMarkup = domain.BuyHoodieKeyboard
 	if _, err := bot.Send(msg); err != nil {
-		log.WithError(err).Panic(domain.ErrCommand_Init)
+		log.WithError(err).Errorf(domain.ErrCommand_Init.Error(), "blackhoodiebutton")
 	}
 	userMap[update.Message.From.ID] = domain.Location_BlackHoodyMenu
 

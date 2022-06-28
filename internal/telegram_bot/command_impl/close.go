@@ -13,7 +13,7 @@ func Close(bot *tgbotapi.BotAPI, update tgbotapi.Update) {
 	msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Bye! Have a nice day! If i need you again, send `/start` in the chat!")
 	msg.ReplyMarkup = tgbotapi.NewRemoveKeyboard(true)
 	if _, err := bot.Send(msg); err != nil {
-		log.WithError(err).Panic(domain.ErrCommand_Init)
+		log.WithError(err).Errorf(domain.ErrCommand_Init.Error(), "hidekeyboard")
 	}
 
 }

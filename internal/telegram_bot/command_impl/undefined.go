@@ -11,7 +11,7 @@ func Undefined(userMap map[int64]domain.Location, bot *tgbotapi.BotAPI, update t
 	msg := tgbotapi.NewMessage(update.Message.Chat.ID, "For start send `/start` in chat")
 	msg.ReplyMarkup = domain.StartKeyboard
 	if _, err := bot.Send(msg); err != nil {
-		log.WithError(err).Panic(domain.ErrCommand_Init)
+		log.WithError(err).Errorf(domain.ErrCommand_Init.Error(), "undefined")
 	}
 	userMap[update.Message.From.ID] = domain.Location_StartMenu
 }
