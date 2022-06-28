@@ -8,4 +8,6 @@ var (
 	Location_StartMenu        Location = "StartMenu"
 	Location_HoodyColorMenu   Location = "HoodyColorMenu"
 	Location_Commends         Location = "Commends"
+	Location_SizeHoodie       Location = "SizeHoodie"
+	Location_DeliveryHoodie   Location = "DeliveryHoodie"
 )
