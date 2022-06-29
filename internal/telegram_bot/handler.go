@@ -33,11 +33,14 @@ func (bot *Telegrambot) InitHandler() {
 		case "🤍White Hoodie🤍":
 			commandimpl.WhiteHoodieCommand(userMap, bot.Bot, update)
 
+		case "Выбрать размер📏":
+			commandimpl.InfoHoodie(userMap, bot.Bot, update)
+
+		case "S-46 (EUR)":
+			commandimpl.SizeHoodie(userMap, bot.Bot, update)
+
 		case "Отзывы🔥":
 			commandimpl.Commends(userMap, bot.Bot, update)
-
-		case "Вконтакте":
-			commandimpl.VkontakteurlCommends(userMap, bot.Bot, update)
 
 		case "◀️Назад":
 			commandimpl.Back(userMap, bot.Bot, update)

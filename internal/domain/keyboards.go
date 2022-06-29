@@ -11,8 +11,7 @@ var (
 		),
 
 		tgbotapi.NewKeyboardButtonRow(
-			tgbotapi.NewKeyboardButton("Наш Вконтакте"),
-			tgbotapi.NewKeyboardButton("Наш Instagram"),
+			tgbotapi.NewKeyboardButton("Магазин LUQ"),
 		),
 		tgbotapi.NewKeyboardButtonRow(
 			tgbotapi.NewKeyboardButton("Вопрос/Ответ❓❗️"),
@@ -37,20 +36,43 @@ var (
 			tgbotapi.NewKeyboardButton("◀️Назад"),
 		),
 	)
-	// Меню покупки худи
-	BuyHoodieKeyboard = tgbotapi.NewReplyKeyboard(
+	// Меню информации о худи
+	InfoHoodieKeyboard = tgbotapi.NewReplyKeyboard(
 		tgbotapi.NewKeyboardButtonRow(
-			tgbotapi.NewKeyboardButton("Купить"),
+			tgbotapi.NewKeyboardButton("Выбрать размер📏"),
 		),
 		tgbotapi.NewKeyboardButtonRow(
 			tgbotapi.NewKeyboardButton("◀️Назад"),
 		),
 	)
-
-	CommendsKeyboard = tgbotapi.NewReplyKeyboard(
+	// Меню выбора размера худи
+	SizeHoodieKeyboard = tgbotapi.NewReplyKeyboard(
 		tgbotapi.NewKeyboardButtonRow(
-			tgbotapi.NewKeyboardButton("Вконтакте"),
+			tgbotapi.NewKeyboardButton("S-46 (EUR)"),
 		),
+		tgbotapi.NewKeyboardButtonRow(
+			tgbotapi.NewKeyboardButton("M-48 (EUR)"),
+		),
+		tgbotapi.NewKeyboardButtonRow(
+			tgbotapi.NewKeyboardButton("L-50 (EUR)"),
+		),
+		tgbotapi.NewKeyboardButtonRow(
+			tgbotapi.NewKeyboardButton("◀️Назад"),
+		),
+	)
+	DeliveryHoodieKeyboard = tgbotapi.NewReplyKeyboard(
+		tgbotapi.NewKeyboardButtonRow(
+			tgbotapi.NewKeyboardButton("Доставка по адресу"),
+		),
+		tgbotapi.NewKeyboardButtonRow(
+			tgbotapi.NewKeyboardButton("Самовывоз"),
+		),
+		tgbotapi.NewKeyboardButtonRow(
+			tgbotapi.NewKeyboardButton("◀️Назад"),
+		),
+	)
+	// Отзывы
+	CommendsKeyboard = tgbotapi.NewReplyKeyboard(
 		tgbotapi.NewKeyboardButtonRow(
 			tgbotapi.NewKeyboardButton("◀️Назад"),
 		),
