@@ -49,8 +49,6 @@ func (bot *Telegrambot) InitHandler() {
 		case "◀️Назад":
 			commandimpl.Back(userMap, bot.Bot, update)
 
-		case "⌨️":
-			commandimpl.Close(bot.Bot, update)
 
 		default:
 			commandimpl.Undefined(userMap, bot.Bot, update)

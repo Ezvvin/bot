@@ -15,7 +15,6 @@ var (
 		),
 		tgbotapi.NewKeyboardButtonRow(
 			tgbotapi.NewKeyboardButton("Вопрос/Ответ❓❗️"),
-			tgbotapi.NewKeyboardButton("⌨️"),
 		),
 	) 
 	// Стартовая меню
