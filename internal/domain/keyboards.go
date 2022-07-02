@@ -15,9 +15,8 @@ var (
 		),
 		tgbotapi.NewKeyboardButtonRow(
 			tgbotapi.NewKeyboardButton("Вопрос/Ответ❓❗️"),
-			tgbotapi.NewKeyboardButton("⌨️"),
 		),
-	)
+	) 
 	// Стартовая меню
 	StartKeyboard = tgbotapi.NewReplyKeyboard(
 		tgbotapi.NewKeyboardButtonRow(
@@ -60,6 +59,7 @@ var (
 			tgbotapi.NewKeyboardButton("◀️Назад"),
 		),
 	)
+	// меню доставки
 	DeliveryHoodieKeyboard = tgbotapi.NewReplyKeyboard(
 		tgbotapi.NewKeyboardButtonRow(
 			tgbotapi.NewKeyboardButton("Доставка по адресу"),

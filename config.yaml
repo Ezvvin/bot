@@ -2,4 +2,4 @@ loglevel: debug
 botconfig: 
   token: 
   timeout: 60
-  debug: false
+  debug: true
