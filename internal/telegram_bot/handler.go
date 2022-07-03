@@ -21,6 +21,7 @@ func (bot *Telegrambot) InitHandler() {
 		}
 
 		switch update.Message.Text {
+		// TODO: Сгруппируй по категориям(можно по локации например и как-то еще, подумай), иначе через 10 комманд ьуь юедт неразбериха...
 		case "/start":
 			commandimpl.Start(userMap, bot.Bot, update)
 
