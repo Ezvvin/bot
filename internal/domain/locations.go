@@ -10,4 +10,5 @@ var (
 	Location_Commends         Location = "Commends"
 	Location_SizeHoodie       Location = "SizeHoodie"
 	Location_DeliveryHoodie   Location = "DeliveryHoodie"
+	Location_DeliveryPoint    Location = "DeliveryPoint"
 )

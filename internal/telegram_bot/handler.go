@@ -39,16 +39,23 @@ func (bot *Telegrambot) InitHandler() {
 		case "S-46 (EUR)":
 			commandimpl.SizeHoodie(userMap, bot.Bot, update)
 
+		case "M-48 (EUR)":
+			commandimpl.SizeHoodie(userMap, bot.Bot, update)
+
+		case "L-50 (EUR)":
+			commandimpl.SizeHoodie(userMap, bot.Bot, update)
+
+		case "Самовывоз":
+			commandimpl.SizeHoodie(userMap, bot.Bot, update)
+
 		case "Отзывы🔥":
 			commandimpl.Commends(userMap, bot.Bot, update)
 
 		case "Магазин LUQ":
-			commandimpl.Contackts( bot.Bot, update)
-			
+			commandimpl.Contackts(bot.Bot, update)
 
 		case "◀️Назад":
 			commandimpl.Back(userMap, bot.Bot, update)
-
 
 		default:
 			commandimpl.Undefined(userMap, bot.Bot, update)
