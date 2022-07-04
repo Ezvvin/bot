@@ -14,6 +14,6 @@ func SizeHoodie(userMap map[int64]domain.Location, bot *tgbotapi.BotAPI, update 
 	if _, err := bot.Send(msg); err != nil {
 		log.WithError(err).Errorf(domain.ErrCommand_Init.Error(), "sizehoodiebutton")
 	}
-	userMap[update.Message.From.ID] = domain.Location_DeliveryHoodie
+	userMap[update.Message.From.ID] = domain.Location_Delivery
 
 }

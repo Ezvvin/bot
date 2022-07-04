@@ -11,7 +11,7 @@ var (
 		),
 
 		tgbotapi.NewKeyboardButtonRow(
-			tgbotapi.NewKeyboardButton("Магазин LUQ"),
+			tgbotapi.NewKeyboardButton("Магазин LÚQ"),
 		),
 		tgbotapi.NewKeyboardButtonRow(
 			tgbotapi.NewKeyboardButton("Вопрос/Ответ❓❗️"),
@@ -71,10 +71,10 @@ var (
 			tgbotapi.NewKeyboardButton("◀️Назад"),
 		),
 	)
-	// Отзывы
-	CommendsKeyboard = tgbotapi.NewReplyKeyboard(
+	// Запрос контактов
+	DeliveryCourierKeyboard = tgbotapi.NewReplyKeyboard(
 		tgbotapi.NewKeyboardButtonRow(
-			tgbotapi.NewKeyboardButton("◀️Назад"),
+			tgbotapi.NewKeyboardButtonContact("Отправить контакт"),
 		),
 	)
 )
