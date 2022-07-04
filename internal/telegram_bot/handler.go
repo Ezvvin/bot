@@ -49,11 +49,14 @@ func (bot *Telegrambot) InitHandler() {
 		case "Отзывы🔥":
 			commandimpl.Commends(userMap, bot.Bot, update)
 
-		case "Магазин LUQ":
-			commandimpl.Contackts(bot.Bot, update)
+		case "Магазин LÚQ":
+			commandimpl.Contacts(bot.Bot, update)
 
 		case "◀️Назад":
 			commandimpl.Back(userMap, bot.Bot, update)
+			
+		case "Данные":
+
 
 		default:
 			commandimpl.Undefined(userMap, bot.Bot, update)
