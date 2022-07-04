@@ -9,7 +9,7 @@ import (
 )
 
 func WhiteHoodieCommand(userMap map[int64]domain.Location, bot *tgbotapi.BotAPI, update tgbotapi.Update) {
-	msg := tgbotapi.NewMessage(update.Message.Chat.ID, "🤍WHITELOGO LUQ HOODIE🤍\nМатериал: Футер 3х- нитка, 85% ХБ, 15% ПЭ🧵\n4300 рублей💰")
+	msg := tgbotapi.NewMessage(update.Message.Chat.ID, "🤍WHITELOGO LÚQ HOODIE🤍\nМатериал: Футер 3х- нитка, 85% ХБ, 15% ПЭ🧵\n4300 рублей💰")
 	msg.ReplyMarkup = domain.InfoHoodieKeyboard
 	if _, err := bot.Send(msg); err != nil {
 		log.WithError(err).Panic(domain.ErrCommand_Init)

@@ -54,9 +54,9 @@ func (bot *Telegrambot) InitHandler() {
 
 		case "◀️Назад":
 			commandimpl.Back(userMap, bot.Bot, update)
-			
-		case "Данные":
 
+		case "phone_number":
+			commandimpl.Catalog(userMap, bot.Bot, update)
 
 		default:
 			commandimpl.Undefined(userMap, bot.Bot, update)
