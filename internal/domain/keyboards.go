@@ -59,9 +59,8 @@ var (
 			tgbotapi.NewKeyboardButton("◀️Назад"),
 		),
 	)
-	// TODO: Почему коммент просто "меню доставки", а в названии переменной фигурирует слово худи?
 	// меню доставки
-	DeliveryHoodieKeyboard = tgbotapi.NewReplyKeyboard(
+	DeliveryKeyboard = tgbotapi.NewReplyKeyboard(
 		tgbotapi.NewKeyboardButtonRow(
 			tgbotapi.NewKeyboardButton("Доставка по адресу"),
 		),
