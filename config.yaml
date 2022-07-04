@@ -1,5 +1,6 @@
 loglevel: debug
 botconfig: 
   token: 
+  paytoken:
   timeout: 60
   debug: true
