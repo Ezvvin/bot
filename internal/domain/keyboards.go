@@ -74,7 +74,19 @@ var (
 	// Запрос контактов
 	DeliveryCourierKeyboard = tgbotapi.NewReplyKeyboard(
 		tgbotapi.NewKeyboardButtonRow(
-			tgbotapi.NewKeyboardButtonContact("Отправить контакт"),
+			tgbotapi.NewKeyboardButton("Отправить контакт"),
+		),
+	)
+	// Подтверждени заказа
+	AcceptKeyboard = tgbotapi.NewReplyKeyboard(
+		tgbotapi.NewKeyboardButtonRow(
+			tgbotapi.NewKeyboardButton("Подтвердить заказ"),
+		),
+	)
+	// Оплата заказа
+	PayKeyboard = tgbotapi.NewReplyKeyboard(
+		tgbotapi.NewKeyboardButtonRow(
+			tgbotapi.NewKeyboardButton("Оплатить заказ"),
 		),
 	)
 )
