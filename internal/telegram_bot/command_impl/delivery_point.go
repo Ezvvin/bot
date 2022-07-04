@@ -9,9 +9,13 @@ import (
 )
 
 func DeliveryPoint(userMap map[int64]domain.Location, bot *tgbotapi.BotAPI, update tgbotapi.Update) {
-	msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Заказ можете забрать по адресу: улица Мнёвники, д. 10к1")
+	sendpoint := tgbotapi.NewLocation(update.Message.Chat.ID, 55.773398, 37.494530)
+	msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Заказ можете забрать по адресу:")
 	msg.ReplyMarkup = domain.DeliveryKeyboard
 	if _, err := bot.Send(msg); err != nil {
+		log.WithError(err).Errorf(domain.ErrCommand_Init.Error(), "deliverypointhoodiebutton")
+	}
+	if _, err := bot.Send(sendpoint); err != nil {
 		log.WithError(err).Errorf(domain.ErrCommand_Init.Error(), "deliverypointhoodiebutton")
 	}
 	userMap[update.Message.From.ID] = domain.Location_DeliveryPoint
