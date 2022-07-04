@@ -51,6 +51,12 @@ func (bot *Telegrambot) InitHandler() {
 
 		case "Магазин LÚQ":
 			commandimpl.Contacts(bot.Bot, update)
+			
+		case "Подтвердить заказ":
+			commandimpl.AcceptDelivery(userMap, bot.Bot, update)
+			
+		case "Оплатить заказ":
+			commandimpl.PayHoodie(userMap, bot.Bot, update)
 
 		case "◀️Назад":
 			commandimpl.Back(userMap, bot.Bot, update)
