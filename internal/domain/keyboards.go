@@ -74,7 +74,7 @@ var (
 	// Запрос контактов
 	DeliveryCourierKeyboard = tgbotapi.NewReplyKeyboard(
 		tgbotapi.NewKeyboardButtonRow(
-			tgbotapi.NewKeyboardButton("Отправить контакт"),
+			tgbotapi.NewKeyboardButtonContact("Отправить контакт"),
 		),
 	)
 	// Подтверждени заказа
