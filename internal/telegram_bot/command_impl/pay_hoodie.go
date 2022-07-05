@@ -10,12 +10,13 @@ import (
 
 func PayHoodie(userMap map[int64]domain.Location, bot *tgbotapi.BotAPI, update tgbotapi.Update) {
 
-	msg := tgbotapi.NewInvoice(update.Message.Chat.ID, "ЗАГОЛОВОК", "описание", "загрузка оплаты", "TOKEN", "старт параметры", "RUB", []tgbotapi.LabeledPrice{{Label: "RUB", Amount: 3500}})
+	msg := tgbotapi.NewInvoice(update.Message.Chat.ID, "🤍WHITELOGO LÚQ HOODIE🤍", "Заказ номер №0001", "ЧТОКУДАЭТО", "381764678:TEST:39516", "standart", "RUB", []tgbotapi.LabeledPrice{{Label: "БЕЛЫЙ LUQ ХУДИ", Amount: 350000}})
 	msg.NeedName = true
-	msg.NeedShippingAddress = true
+	msg.NeedShippingAddress = false
 	msg.NeedPhoneNumber = true
-	msg.SuggestedTipAmounts = []int{3500, 4000}
-	msg.MaxTipAmount = 37508026
+	msg.SuggestedTipAmounts = []int{} // ввод сумм чаевых
+	// msg.MaxTipAmount = 100000 ввод максимальной суммы чаевых
+	msg.PhotoURL = "https://sun9-10.userapi.com/impg/-JuLUtuq1ZI_9eubyAoe1RzpHqhoMAZJgNQoBg/IuWP_-PD9wU.jpg?size=1280x1280&quality=95&sign=dafb57631e851fd63af53f800674c99c&type=album"
 	if _, err := bot.Send(msg); err != nil {
 		log.WithError(err).Errorf(domain.ErrCommand_Init.Error(), "pay hoodie")
 	}

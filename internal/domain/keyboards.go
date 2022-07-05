@@ -14,7 +14,7 @@ var (
 			tgbotapi.NewKeyboardButton("Магазин LÚQ"),
 		),
 		tgbotapi.NewKeyboardButtonRow(
-			tgbotapi.NewKeyboardButton("Вопрос/Ответ❓❗️"),
+			tgbotapi.NewKeyboardButton("Поддержка"),
 		),
 	)
 	// Стартовая меню
