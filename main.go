@@ -1,6 +1,7 @@
 package main
 
 import (
+	db_usecase "bot/internal/database/usecase"
 	"bot/internal/domain"
 	"bot/internal/logger"
 	telegrambot "bot/internal/telegram_bot"
@@ -29,6 +30,9 @@ func main() {
 		log.WithError(err).Fatal(domain.ErrTelegramBot_Init)
 	}
 
+	// Создаем юзкейз "базы данных"
+	dbUsecase := db_usecase.InitDataBaseUsecase()
+
 	//Получаем обновления от бота
-	bot.InitHandler(cfg)
+	bot.InitHandler(cfg, dbUsecase)
 }

@@ -1,6 +1,7 @@
 package telegrambot
 
 import (
+	db_usecase "bot/internal/database/usecase"
 	"bot/internal/domain"
 	commandimpl "bot/internal/telegram_bot/command_impl"
 
@@ -8,7 +9,7 @@ import (
 	log "github.com/sirupsen/logrus"
 )
 
-func (bot *Telegrambot) InitHandler(cfg domain.Config) {
+func (bot *Telegrambot) InitHandler(cfg domain.Config, dbu *db_usecase.DataBaseUsecase) {
 	log.Debug("Init bot handler")
 	updates := bot.Bot.GetUpdatesChan(bot.UpdateCfg)
 	// Создаем мапу для отслеживания локации пользователя
@@ -123,7 +124,9 @@ func (bot *Telegrambot) InitHandler(cfg domain.Config) {
 		default:
 			switch update.Message.Text {
 			case "/start":
-				commandimpl.Start(userMap, bot.Bot, update)
+				commandimpl.Start(userMap, bot.Bot, update, dbu)
+				// TODO: add user in dbu
+
 			}
 		}
 	}
