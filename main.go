@@ -30,5 +30,5 @@ func main() {
 	}
 
 	//Получаем обновления от бота
-	bot.InitHandler()
+	bot.InitHandler(cfg)
 }

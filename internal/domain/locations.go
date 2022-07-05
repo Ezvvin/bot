@@ -13,4 +13,5 @@ var (
 	Location_DeliveryCourier  Location = "DeliveryCourier"
 	Location_PayHoodie        Location = "PayHoodie"
 	Location_AcceptDelivery   Location = "AcceptDelivery"
+	Location_Support          Location = "Support"
 )

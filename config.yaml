@@ -1,6 +1,7 @@
 loglevel: debug
+adminchat: 
 botconfig: 
-  token: 
+  token: 5437936243:AAG8qSRApD7V90ZZUVDM4ze0bcRbUC1rbrE
   paytoken:
   timeout: 60
   debug: true
