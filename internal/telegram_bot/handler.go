@@ -13,7 +13,6 @@ func (bot *Telegrambot) InitHandler(cfg domain.Config) {
 	updates := bot.Bot.GetUpdatesChan(bot.UpdateCfg)
 	// Создаем мапу для отслеживания локации пользователя
 	userMap := map[int64]domain.Location{}
-	// flag := false
 	// Проверяем каждое обновление
 	for update := range updates {
 		// Проверяем что сообщение не пустое
@@ -33,65 +32,99 @@ func (bot *Telegrambot) InitHandler(cfg domain.Config) {
 			userMap[update.Message.From.ID] = domain.Location_MainMenu
 			continue
 		}
+		// TODO сделат ькнопку назад \ главное меню
 
-		switch update.Message.Text {
-		// TODO: Сгруппируй по категориям(можно по локации например и как-то еще, подумай), иначе через 10 комманд ьуь юедт неразбериха...
-		case "/start":
-			commandimpl.Start(userMap, bot.Bot, update)
+		switch userMap[update.Message.From.ID] {
+		case domain.Location_MainMenu:
+			switch update.Message.Text {
+			case "Каталог одежды🥼":
+				commandimpl.Catalog(userMap, bot.Bot, update)
 
-		case "Каталог одежды🥼":
-			commandimpl.Catalog(userMap, bot.Bot, update)
+			case "Отзывы🔥":
+				commandimpl.Commends(userMap, bot.Bot, update)
 
-		case "🖤Black Hoodie🖤":
-			commandimpl.BlackHoodieCommand(userMap, bot.Bot, update)
+			case "Поддержка":
+				commandimpl.Support(userMap, bot.Bot, update)
 
-		case "🤍White Hoodie🤍":
-			commandimpl.WhiteHoodieCommand(userMap, bot.Bot, update)
+			case "Магазин LÚQ":
+				commandimpl.Contacts(bot.Bot, update)
+			default:
+				commandimpl.Undefined(userMap, bot.Bot, update)
 
-		case "Выбрать размер📏":
-			commandimpl.InfoHoodie(userMap, bot.Bot, update)
+			}
+		case domain.Location_HoodyCatalogMenu:
+			switch update.Message.Text {
+			case "🖤Black Hoodie🖤":
+				commandimpl.BlackHoodieCommand(userMap, bot.Bot, update)
 
-		case "S-46 (EUR)", "M-48 (EUR)", "L-50 (EUR)":
-			commandimpl.SizeHoodie(userMap, bot.Bot, update)
+			case "🤍White Hoodie🤍":
+				commandimpl.WhiteHoodieCommand(userMap, bot.Bot, update)
+			case "◀️Назад":
+				commandimpl.Back(userMap, bot.Bot, update)
+			default:
+				commandimpl.Undefined(userMap, bot.Bot, update)
+			}
+		case domain.Location_HoodyColorMenu:
+			switch update.Message.Text {
+			case "Выбрать размер📏":
+				commandimpl.InfoHoodie(userMap, bot.Bot, update)
+			case "◀️Назад":
+				commandimpl.Back(userMap, bot.Bot, update)
+			default:
+				commandimpl.Undefined(userMap, bot.Bot, update)
+			}
+		case domain.Location_SizeHoodie:
+			switch update.Message.Text {
+			case "S-46 (EUR)", "M-48 (EUR)", "L-50 (EUR)":
+				commandimpl.SizeHoodie(userMap, bot.Bot, update)
+			case "◀️Назад":
+				commandimpl.Back(userMap, bot.Bot, update)
+			default:
+				commandimpl.Undefined(userMap, bot.Bot, update)
+			}
+		case domain.Location_Delivery:
+			switch update.Message.Text {
+			case "Самовывоз":
+				commandimpl.DeliveryPoint(userMap, bot.Bot, update)
 
-		case "Самовывоз":
-			commandimpl.DeliveryPoint(userMap, bot.Bot, update)
+			case "Доставка по адресу":
+				commandimpl.DeliveryCourier(userMap, bot.Bot, update)
+			case "◀️Назад":
+				commandimpl.Back(userMap, bot.Bot, update)
+			default:
+				commandimpl.Undefined(userMap, bot.Bot, update)
+			}
+		case domain.Location_DeliveryCourier:
+			switch update.Message.Text {
+			case "◀️Назад":
+				commandimpl.Back(userMap, bot.Bot, update)
+			default:
+				commandimpl.Undefined(userMap, bot.Bot, update)
+			}
+		case domain.Location_DeliveryPoint:
+			switch update.Message.Text {
+			case "Подтвердить заказ":
+				commandimpl.AcceptDelivery(userMap, bot.Bot, update)
+			case "◀️Назад":
+				commandimpl.Back(userMap, bot.Bot, update)
+			default:
+				commandimpl.Undefined(userMap, bot.Bot, update)
+			}
+		case domain.Location_AcceptDelivery:
+			switch update.Message.Text {
+			case "Оплатить заказ":
+				commandimpl.PayHoodie(userMap, bot.Bot, update)
+			case "◀️Назад":
+				commandimpl.Back(userMap, bot.Bot, update)
+			default:
+				commandimpl.Undefined(userMap, bot.Bot, update)
 
-		case "Доставка по адресу":
-			commandimpl.DeliveryCourier(userMap, bot.Bot, update)
-
-		case "Отзывы🔥":
-			commandimpl.Commends(userMap, bot.Bot, update)
-
-		case "Поддержка":
-			commandimpl.Support(userMap, bot.Bot, update)
-
-		case "Магазин LÚQ":
-			commandimpl.Contacts(bot.Bot, update)
-
-		case "Подтвердить заказ":
-			commandimpl.AcceptDelivery(userMap, bot.Bot, update)
-
-		case "Оплатить заказ":
-			commandimpl.PayHoodie(userMap, bot.Bot, update)
-
-		case "◀️Назад":
-			commandimpl.Back(userMap, bot.Bot, update)
-
-		case "phone_number":
-			commandimpl.Catalog(userMap, bot.Bot, update)
-
+			}
 		default:
-			// ОСТОРОЖНО КОСТЫЛЬ
-			// if flag {
-			// 	copymessage := tgbotapi.NewCopyMessage(430337954, update.Message.Chat.ID, update.Message.MessageID)
-			// 	if _, err := bot.Bot.Send(copymessage); err != nil {
-			// 		log.WithError(err).Errorf(domain.ErrCommand_Init.Error(), "copymessage")
-			// 	}
-			// 	continue
-			// }
-			commandimpl.Undefined(userMap, bot.Bot, update)
+			switch update.Message.Text {
+			case "/start":
+				commandimpl.Start(userMap, bot.Bot, update)
+			}
 		}
-
 	}
 }

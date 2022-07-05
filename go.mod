@@ -10,6 +10,6 @@ require (
 
 require (
 	github.com/BurntSushi/toml v1.1.0 // indirect
-	golang.org/x/sys v0.0.0-20220702020025-31831981b65f // indirect
+	golang.org/x/sys v0.0.0-20220704084225-05e143d24a9e // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 )
