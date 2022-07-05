@@ -49,6 +49,9 @@ func (bot *Telegrambot) InitHandler() {
 		case "Отзывы🔥":
 			commandimpl.Commends(userMap, bot.Bot, update)
 
+		case "Поддержка":
+			commandimpl.Support(bot.Bot, update)
+
 		case "Магазин LÚQ":
 			commandimpl.Contacts(bot.Bot, update)
 			
