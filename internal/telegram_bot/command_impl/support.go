@@ -8,9 +8,9 @@ import (
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
 )
 
-func Support(userMap map[int64]domain.Location, bot *tgbotapi.BotAPI, update tgbotapi.Update, cfg domain.Config) {
+func Support(userMap map[int64]domain.Location, bot *tgbotapi.BotAPI, update tgbotapi.Update) {
 
-	msg := tgbotapi.NewMessage(update.Message.Chat.ID,"Опишите вашу проблему, наш менеджер свяжется с вами и поможет вам!")
+	msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Опишите вашу проблему, наш менеджер свяжется с вами и поможет вам!")
 	msg.ReplyMarkup = domain.MainMenuKeyboard
 	if _, err := bot.Send(msg); err != nil {
 		log.WithError(err).Errorf(domain.ErrCommand_Init.Error(), "supportbutton")

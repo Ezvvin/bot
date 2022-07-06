@@ -22,16 +22,13 @@ func (bot *Telegrambot) InitHandler(cfg domain.Config, dbu *db_usecase.DataBaseU
 		if update.Message == nil {
 			continue
 		}
-		// проверяем , имеет ли сообщение формат телефона
+		// проверяем , имеет ли сообщение формат контакта
 		if update.Message.Contact != nil {
 			log.Debug("sos", update.Message.Contact)
 			continue
 		}
 		if userMap[update.Message.From.ID] == domain.Location_Support {
-			copymessage := update.Message.Text
-			name := update.FromChat().UserName
-			aidi := update.Message.From.ID
-			msgSupport := tgbotapi.NewMessage(cfg.AdminChat, fmt.Sprintf(strconv.FormatInt(aidi, 10), "Клиент", name, "ждет ответа на вопрос:", copymessage))
+			msgSupport := tgbotapi.NewMessage(cfg.AdminChat, fmt.Sprintf(strconv.FormatInt(update.Message.From.ID, 10), "Клиент", update.FromChat().UserName, "ждет ответа на вопрос:", update.Message.Text))
 			if _, err := bot.Bot.Send(msgSupport); err != nil {
 				log.WithError(err).Errorf(domain.ErrCommand_Init.Error(), "groupmessage")
 			}
@@ -50,7 +47,7 @@ func (bot *Telegrambot) InitHandler(cfg domain.Config, dbu *db_usecase.DataBaseU
 				commandimpl.Commends(userMap, bot.Bot, update)
 
 			case "Поддержка":
-				commandimpl.Support(userMap, bot.Bot, update, cfg)
+				commandimpl.Support(userMap, bot.Bot, update)
 
 			case "Магазин LÚQ":
 				commandimpl.Contacts(bot.Bot, update)
