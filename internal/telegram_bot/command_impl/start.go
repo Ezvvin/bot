@@ -23,7 +23,7 @@ func Start(userMap map[int64]domain.Location, bot *tgbotapi.BotAPI, update tgbot
 	}
 	// TODO: create user cart
 
-	log.Debug(user) //TODO delete
+	log.Debug(user) // чтобы не жаловался на не использование
 
 	// TODO: Add user in db
 	// for example `dbu.AddUser(user)`
