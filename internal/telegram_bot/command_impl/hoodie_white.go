@@ -15,12 +15,12 @@ func WhiteHoodieCommand(userMap map[int64]domain.Location, bot *tgbotapi.BotAPI,
 		log.WithError(err).Panic(domain.ErrCommand_Init)
 	}
 
-	image := tgbotapi.NewMediaGroup(msg.ChatID, []interface{}{
-		tgbotapi.NewInputMediaPhoto(tgbotapi.FilePath("D:/TelBot/bot/src/pictures/white_hoodie/whitehoodie.jpg")),
-		tgbotapi.NewInputMediaPhoto(tgbotapi.FilePath("D:/TelBot/bot/src/pictures/white_hoodie/whitehoodie2.jpg"))})
-	if _, err := bot.SendMediaGroup(image); err != nil {
-		log.WithError(err).Errorf(domain.ErrCommand_Init.Error(), "whitehoodie")
-	}
+	// image := tgbotapi.NewMediaGroup(msg.ChatID, []interface{}{
+	// 	tgbotapi.NewInputMediaPhoto(tgbotapi.FilePath("D:/TelBot/bot/src/pictures/white_hoodie/whitehoodie.jpg")),
+	// 	tgbotapi.NewInputMediaPhoto(tgbotapi.FilePath("D:/TelBot/bot/src/pictures/white_hoodie/whitehoodie2.jpg"))})
+	// if _, err := bot.SendMediaGroup(image); err != nil {
+	// 	log.WithError(err).Errorf(domain.ErrCommand_Init.Error(), "whitehoodie")
+	// }
 	userMap[update.Message.From.ID] = domain.Location_HoodyColorMenu
 
 }
