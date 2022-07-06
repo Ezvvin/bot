@@ -4,6 +4,8 @@ import (
 	db_usecase "bot/internal/database/usecase"
 	"bot/internal/domain"
 	commandimpl "bot/internal/telegram_bot/command_impl"
+	"fmt"
+	"strconv"
 
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
 	log "github.com/sirupsen/logrus"
@@ -20,15 +22,18 @@ func (bot *Telegrambot) InitHandler(cfg domain.Config, dbu *db_usecase.DataBaseU
 		if update.Message == nil {
 			continue
 		}
-
+		// проверяем , имеет ли сообщение формат телефона
 		if update.Message.Contact != nil {
 			log.Debug("sos", update.Message.Contact)
 			continue
 		}
 		if userMap[update.Message.From.ID] == domain.Location_Support {
-			copymessage := tgbotapi.NewCopyMessage(cfg.AdminChat, update.Message.Chat.ID, update.Message.MessageID)
-			if _, err := bot.Bot.Send(copymessage); err != nil {
-				log.WithError(err).Errorf(domain.ErrCommand_Init.Error(), "copymessage")
+			copymessage := update.Message.Text
+			name := update.FromChat().UserName
+			aidi := update.Message.From.ID
+			msgSupport := tgbotapi.NewMessage(cfg.AdminChat, fmt.Sprintf(strconv.FormatInt(aidi, 10), "Клиент", name, "ждет ответа на вопрос:", copymessage))
+			if _, err := bot.Bot.Send(msgSupport); err != nil {
+				log.WithError(err).Errorf(domain.ErrCommand_Init.Error(), "groupmessage")
 			}
 			userMap[update.Message.From.ID] = domain.Location_MainMenu
 			continue
@@ -45,7 +50,7 @@ func (bot *Telegrambot) InitHandler(cfg domain.Config, dbu *db_usecase.DataBaseU
 				commandimpl.Commends(userMap, bot.Bot, update)
 
 			case "Поддержка":
-				commandimpl.Support(userMap, bot.Bot, update)
+				commandimpl.Support(userMap, bot.Bot, update, cfg)
 
 			case "Магазин LÚQ":
 				commandimpl.Contacts(bot.Bot, update)
@@ -114,7 +119,7 @@ func (bot *Telegrambot) InitHandler(cfg domain.Config, dbu *db_usecase.DataBaseU
 		case domain.Location_AcceptDelivery:
 			switch update.Message.Text {
 			case "Оплатить заказ":
-				commandimpl.PayHoodie(userMap, bot.Bot, update)
+				commandimpl.PayHoodie(userMap, bot.Bot, update, cfg.BotConfig)
 			case "◀️Назад":
 				commandimpl.Back(userMap, bot.Bot, update)
 			default:

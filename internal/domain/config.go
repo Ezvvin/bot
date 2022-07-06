@@ -6,7 +6,8 @@ type Config struct {
 	BotConfig BotConfig
 }
 type BotConfig struct {
-	Token   string `default:""`
-	Timeout int    `default:"60"`
-	Debug   bool   `default:"false"`
+	Token    string `default:""`
+	PayToken string `default:""`
+	Timeout  int    `default:"60"`
+	Debug    bool   `default:"false"`
 }

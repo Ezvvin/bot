@@ -35,6 +35,5 @@ func main() {
 
 	//Получаем обновления от бота
 	bot.InitHandler(cfg, dbUsecase)
-	////////
-	/////
+
 }

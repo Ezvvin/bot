@@ -8,9 +8,9 @@ import (
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
 )
 
-func PayHoodie(userMap map[int64]domain.Location, bot *tgbotapi.BotAPI, update tgbotapi.Update) {
+func PayHoodie(userMap map[int64]domain.Location, bot *tgbotapi.BotAPI, update tgbotapi.Update, cfg domain.BotConfig) {
 
-	msg := tgbotapi.NewInvoice(update.Message.Chat.ID, "🤍WHITELOGO LÚQ HOODIE🤍", "Заказ номер №0001", "ЧТОКУДАЭТО", "381764678:TEST:39516", "standart", "RUB", []tgbotapi.LabeledPrice{{Label: "БЕЛЫЙ LUQ ХУДИ", Amount: 350000}})
+	msg := tgbotapi.NewInvoice(update.Message.Chat.ID, "🤍WHITELOGO LÚQ HOODIE🤍", "Заказ номер №0001", "ЧТОКУДАЭТО", cfg.PayToken, "standart", "RUB", []tgbotapi.LabeledPrice{{Label: "БЕЛЫЙ LUQ ХУДИ", Amount: 350000}})
 	msg.NeedName = true
 	msg.NeedShippingAddress = false
 	msg.NeedPhoneNumber = true
