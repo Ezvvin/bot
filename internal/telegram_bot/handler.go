@@ -35,8 +35,7 @@ func (bot *Telegrambot) InitHandler(cfg domain.Config, dbu *db_usecase.DataBaseU
 			userMap[update.Message.From.ID] = domain.Location_MainMenu
 			continue
 		}
-		// TODO сделат ькнопку назад \ главное меню
-
+		// команды
 		switch userMap[update.Message.From.ID] {
 
 		case domain.Location_MainMenu:
@@ -69,6 +68,9 @@ func (bot *Telegrambot) InitHandler(cfg domain.Config, dbu *db_usecase.DataBaseU
 			case "◀️Назад":
 				commandimpl.Back(userMap, bot.Bot, update)
 
+			case "Главное меню":
+				commandimpl.BackToMenu(userMap, bot.Bot, update)
+
 			default:
 				commandimpl.Undefined(userMap, bot.Bot, update)
 			}
@@ -76,10 +78,13 @@ func (bot *Telegrambot) InitHandler(cfg domain.Config, dbu *db_usecase.DataBaseU
 			switch update.Message.Text {
 
 			case "Выбрать размер📏":
-				commandimpl.InfoHoodie(userMap, bot.Bot, update)
+				commandimpl.SizeHoodie(userMap, bot.Bot, update)
 
 			case "◀️Назад":
 				commandimpl.Back(userMap, bot.Bot, update)
+
+			case "Главное меню":
+				commandimpl.BackToMenu(userMap, bot.Bot, update)
 
 			default:
 				commandimpl.Undefined(userMap, bot.Bot, update)
@@ -88,10 +93,13 @@ func (bot *Telegrambot) InitHandler(cfg domain.Config, dbu *db_usecase.DataBaseU
 			switch update.Message.Text {
 
 			case "S-46 (EUR)", "M-48 (EUR)", "L-50 (EUR)":
-				commandimpl.SizeHoodie(userMap, bot.Bot, update)
+				commandimpl.Delivery(userMap, bot.Bot, update)
 
 			case "◀️Назад":
 				commandimpl.Back(userMap, bot.Bot, update)
+
+			case "Главное меню":
+				commandimpl.BackToMenu(userMap, bot.Bot, update)
 
 			default:
 				commandimpl.Undefined(userMap, bot.Bot, update)
@@ -108,6 +116,9 @@ func (bot *Telegrambot) InitHandler(cfg domain.Config, dbu *db_usecase.DataBaseU
 			case "◀️Назад":
 				commandimpl.Back(userMap, bot.Bot, update)
 
+			case "Главное меню":
+				commandimpl.BackToMenu(userMap, bot.Bot, update)
+
 			default:
 				commandimpl.Undefined(userMap, bot.Bot, update)
 			}
@@ -116,6 +127,9 @@ func (bot *Telegrambot) InitHandler(cfg domain.Config, dbu *db_usecase.DataBaseU
 
 			case "◀️Назад":
 				commandimpl.Back(userMap, bot.Bot, update)
+
+			case "Главное меню":
+				commandimpl.BackToMenu(userMap, bot.Bot, update)
 
 			default:
 				commandimpl.Undefined(userMap, bot.Bot, update)
@@ -129,6 +143,9 @@ func (bot *Telegrambot) InitHandler(cfg domain.Config, dbu *db_usecase.DataBaseU
 			case "◀️Назад":
 				commandimpl.Back(userMap, bot.Bot, update)
 
+			case "Главное меню":
+				commandimpl.BackToMenu(userMap, bot.Bot, update)
+
 			default:
 				commandimpl.Undefined(userMap, bot.Bot, update)
 			}
@@ -140,6 +157,9 @@ func (bot *Telegrambot) InitHandler(cfg domain.Config, dbu *db_usecase.DataBaseU
 
 			case "◀️Назад":
 				commandimpl.Back(userMap, bot.Bot, update)
+
+			case "Главное меню":
+				commandimpl.BackToMenu(userMap, bot.Bot, update)
 
 			default:
 				commandimpl.Undefined(userMap, bot.Bot, update)

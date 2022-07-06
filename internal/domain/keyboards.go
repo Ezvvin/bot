@@ -3,6 +3,12 @@ package domain
 import tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
 
 var (
+	// Стартовая меню
+	StartKeyboard = tgbotapi.NewReplyKeyboard(
+		tgbotapi.NewKeyboardButtonRow(
+			tgbotapi.NewKeyboardButton("/start"),
+		),
+	)
 	// Главное меню
 	MainMenuKeyboard = tgbotapi.NewReplyKeyboard(
 		tgbotapi.NewKeyboardButtonRow(
@@ -17,12 +23,6 @@ var (
 			tgbotapi.NewKeyboardButton("Поддержка"),
 		),
 	)
-	// Стартовая меню
-	StartKeyboard = tgbotapi.NewReplyKeyboard(
-		tgbotapi.NewKeyboardButtonRow(
-			tgbotapi.NewKeyboardButton("/start"),
-		),
-	)
 	// Меню выбора худи
 	HoodyMenuKeyboard = tgbotapi.NewReplyKeyboard(
 		tgbotapi.NewKeyboardButtonRow(
@@ -33,6 +33,7 @@ var (
 		),
 		tgbotapi.NewKeyboardButtonRow(
 			tgbotapi.NewKeyboardButton("◀️Назад"),
+			tgbotapi.NewKeyboardButton("Главное меню"),
 		),
 	)
 	// Меню информации о худи
@@ -42,6 +43,7 @@ var (
 		),
 		tgbotapi.NewKeyboardButtonRow(
 			tgbotapi.NewKeyboardButton("◀️Назад"),
+			tgbotapi.NewKeyboardButton("Главное меню"),
 		),
 	)
 	// Меню выбора размера худи
@@ -57,6 +59,7 @@ var (
 		),
 		tgbotapi.NewKeyboardButtonRow(
 			tgbotapi.NewKeyboardButton("◀️Назад"),
+			tgbotapi.NewKeyboardButton("Главное меню"),
 		),
 	)
 	// меню доставки
@@ -69,6 +72,7 @@ var (
 		),
 		tgbotapi.NewKeyboardButtonRow(
 			tgbotapi.NewKeyboardButton("◀️Назад"),
+			tgbotapi.NewKeyboardButton("Главное меню"),
 		),
 	)
 	// Запрос контактов
@@ -78,6 +82,7 @@ var (
 		),
 		tgbotapi.NewKeyboardButtonRow(
 			tgbotapi.NewKeyboardButton("◀️Назад"),
+			tgbotapi.NewKeyboardButton("Главное меню"),
 		),
 	)
 	// Подтверждени заказа
@@ -87,6 +92,7 @@ var (
 		),
 		tgbotapi.NewKeyboardButtonRow(
 			tgbotapi.NewKeyboardButton("◀️Назад"),
+			tgbotapi.NewKeyboardButton("Главное меню"),
 		),
 	)
 	// Оплата заказа
@@ -96,6 +102,7 @@ var (
 		),
 		tgbotapi.NewKeyboardButtonRow(
 			tgbotapi.NewKeyboardButton("◀️Назад"),
+			tgbotapi.NewKeyboardButton("Главное меню"),
 		),
 	)
 )
