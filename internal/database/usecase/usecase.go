@@ -17,3 +17,5 @@ func (dbu *DataBaseUsecase) AddUser(user domain.User) {
 func (dbu *DataBaseUsecase) AddCart(cart domain.Cart) {
 	dbu.Carts = append(dbu.Carts, cart)
 }
+
+//TODO добавить апдейт юзера для записи данных

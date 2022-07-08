@@ -28,7 +28,7 @@ func (bot *Telegrambot) InitHandler(cfg domain.Config, dbu *db_usecase.DataBaseU
 			continue
 		}
 		if userMap[update.Message.From.ID] == domain.Location_Support {
-			msgSupport := tgbotapi.NewMessage(cfg.AdminChat, fmt.Sprintf(strconv.FormatInt(update.Message.From.ID, 10), "Клиент", update.FromChat().UserName, "ждет ответа на вопрос:", update.Message.Text))
+			msgSupport := tgbotapi.NewMessage(cfg.AdminChat, fmt.Sprintf(strconv.FormatInt(update.Message.From.ID, 10), "Клиент", update.FromChat().UserName, "ждет ответа на вопрос:", update.Message.Text)) //TODO сделать красиво
 			if _, err := bot.Bot.Send(msgSupport); err != nil {
 				log.WithError(err).Errorf(domain.ErrCommand_Init.Error(), "groupmessage")
 			}
@@ -169,7 +169,6 @@ func (bot *Telegrambot) InitHandler(cfg domain.Config, dbu *db_usecase.DataBaseU
 
 			case "/start":
 				commandimpl.Start(userMap, bot.Bot, update, dbu)
-				// TODO: add user in dbu
 			}
 		}
 	}
