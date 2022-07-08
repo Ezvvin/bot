@@ -26,5 +26,3 @@ func (c *Cart) RemoveProduct(p Product) {
 		}
 	}
 }
-
-// TODO: Add func for remove product from cart
