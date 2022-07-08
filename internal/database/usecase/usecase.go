@@ -28,4 +28,4 @@ func (dbu *DataBaseUsecase) AddCart(c domain.Cart) {
 	dbu.Carts = append(dbu.Carts, c)
 }
 
-//TODO добавить апдейт юзера для записи данных
+//TODO добавить апдейт юзера для записи данных для номера телефона

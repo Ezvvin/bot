@@ -57,7 +57,7 @@ func (bot *Telegrambot) InitHandler(cfg domain.Config, dbu *db_usecase.DataBaseU
 				commandimpl.Contacts(bot.Bot, update)
 
 			case "Корзина":
-				commandimpl.Contacts(bot.Bot, update)
+				commandimpl.CartMenu(userMap, bot.Bot, update)
 
 			default:
 				commandimpl.Undefined(userMap, bot.Bot, update)
