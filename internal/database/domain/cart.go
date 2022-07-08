@@ -3,7 +3,7 @@ package domain
 type Cart struct {
 	Id         int // for now use user id
 	User       User
-	Products   []Product //whiye hoodie black hoodie white
+	Products   []Product
 	TotalPrice int
 }
 
@@ -18,10 +18,13 @@ func (c *Cart) CalculateTP() int {
 func (c *Cart) AddProduct(p Product) {
 	c.Products = append(c.Products, p)
 }
-func (c *Cart) RemoveProduct(p Product, i int) {
-	c.Products[i] = c.Products[len(c.Products)-1]
-	c.Products = c.Products[:len(c.Products)-1]
-}
+func (c *Cart) RemoveProduct(p Product) {
 
-// complete?
+	for i, product := range c.Products {
+	  if p == product {
+		c.Products = append(c.Products[:i], c.Products[i+1:]...) 
+	  }
+	}
+  }
+
 // TODO: Add func for remove product from cart
