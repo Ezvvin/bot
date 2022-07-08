@@ -28,16 +28,17 @@ func (bot *Telegrambot) InitHandler(cfg domain.Config, dbu *db_usecase.DataBaseU
 		}
 		if userMap[update.Message.From.ID] == domain.Location_Support {
 			msgSupport := tgbotapi.NewMessage(cfg.AdminChat, fmt.Sprintf(("ID: %d\nКлиент: %s\nВопрос: %s\n"), update.Message.From.ID, update.Message.From.FirstName, update.Message.Text))
-			msgSupport.ParseMode = "HTML"
 			if _, err := bot.Bot.Send(msgSupport); err != nil {
 				log.WithError(err).Errorf(domain.ErrCommand_Init.Error(), "supportmsg")
 			}
 			msg := tgbotapi.NewMessage(update.Message.Chat.ID, "В ближайшее время с вами свяжется наш менеджер!")
+			msg.ReplyMarkup = domain.MainMenuKeyboard
 			if _, err := bot.Bot.Send(msg); err != nil {
 				log.WithError(err).Errorf(domain.ErrCommand_Init.Error(), "msgforusersupport")
 			}
 			userMap[update.Message.From.ID] = domain.Location_MainMenu
 			continue
+
 		}
 		// команды
 		switch userMap[update.Message.From.ID] {
