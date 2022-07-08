@@ -26,6 +26,7 @@ func (bot *Telegrambot) InitHandler(cfg domain.Config, dbu *db_usecase.DataBaseU
 			log.Debug("sos", update.Message.Contact)
 			continue
 		}
+		// обратная связь , ждем сообщение от пользователя
 		if userMap[update.Message.From.ID] == domain.Location_Support {
 			msgSupport := tgbotapi.NewMessage(cfg.AdminChat, fmt.Sprintf(("ID: %d\nКлиент: %s\nВопрос: %s\n"), update.Message.From.ID, update.Message.From.FirstName, update.Message.Text))
 			if _, err := bot.Bot.Send(msgSupport); err != nil {
