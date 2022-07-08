@@ -23,11 +23,10 @@ func Start(userMap map[int64]domain.Location, bot *tgbotapi.BotAPI, update tgbot
 		FirstName: update.Message.From.FirstName,
 		LastName:  update.Message.From.LastName,
 	}
-	// TODO: create user cart
-
-	log.Debug(user) // чтобы не жаловался на не использование
-
-	// TODO: Add user in db
-	// for example `dbu.AddUser(user)`
-	// TODO: Add user cart
+	cart := db_domain.Cart{
+		Id:   int(update.Message.From.ID),
+		User: user,
+	}
+	dbu.AddUser(user)
+	dbu.AddCart(cart)
 }
