@@ -11,5 +11,9 @@ func InitDataBaseUsecase() *DataBaseUsecase {
 	dbu := new(DataBaseUsecase)
 	return dbu
 }
-
-// TODO: Create functions for add user and user cart into database
+func (dbu *DataBaseUsecase) AddUser(user domain.User) {
+	dbu.Users = append(dbu.Users, user)
+}
+func (dbu *DataBaseUsecase) AddCart(cart domain.Cart) {
+	dbu.Carts = append(dbu.Carts, cart)
+}
