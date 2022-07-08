@@ -80,7 +80,7 @@ func (bot *Telegrambot) InitHandler(cfg domain.Config, dbu *db_usecase.DataBaseU
 			switch update.Message.Text {
 
 			case "🖤Black Hoodie🖤":
-				commandimpl.BlackHoodieCommand(userMap, bot.Bot, update)
+				commandimpl.BlackHoodieCommand(userMap, bot.Bot, update, dbu)
 
 			case "🤍White Hoodie🤍":
 				commandimpl.WhiteHoodieCommand(userMap, bot.Bot, update)

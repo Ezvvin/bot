@@ -29,3 +29,5 @@ func (dbu *DataBaseUsecase) AddCart(c domain.Cart) {
 }
 
 //TODO добавить апдейт юзера для записи данных для номера телефона
+//TODO добавить метод получение корзины юзера из бд
+//TODO func update user cart
