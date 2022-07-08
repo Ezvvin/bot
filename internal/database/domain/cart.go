@@ -19,12 +19,12 @@ func (c *Cart) AddProduct(p Product) {
 	c.Products = append(c.Products, p)
 }
 func (c *Cart) RemoveProduct(p Product) {
-
 	for i, product := range c.Products {
-	  if p == product {
-		c.Products = append(c.Products[:i], c.Products[i+1:]...) 
-	  }
+		if p == product {
+			c.Products = append(c.Products[:i], c.Products[i+1:]...)
+			return
+		}
 	}
-  }
+}
 
 // TODO: Add func for remove product from cart
