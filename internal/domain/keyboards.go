@@ -18,9 +18,19 @@ var (
 
 		tgbotapi.NewKeyboardButtonRow(
 			tgbotapi.NewKeyboardButton("Магазин LÚQ"),
+			tgbotapi.NewKeyboardButton("Корзина"),
 		),
 		tgbotapi.NewKeyboardButtonRow(
 			tgbotapi.NewKeyboardButton("Поддержка"),
+		),
+	)
+	// Меню корзины
+	CartMenuKeyboard = tgbotapi.NewReplyKeyboard(
+		tgbotapi.NewKeyboardButtonRow(
+			tgbotapi.NewKeyboardButton("◀️Назад"),
+		),
+		tgbotapi.NewKeyboardButtonRow(
+			tgbotapi.NewKeyboardButton("Каталог одежды🥼"),
 		),
 	)
 	// Меню выбора худи

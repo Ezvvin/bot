@@ -52,6 +52,22 @@ func (bot *Telegrambot) InitHandler(cfg domain.Config, dbu *db_usecase.DataBaseU
 			case "Магазин LÚQ":
 				commandimpl.Contacts(bot.Bot, update)
 
+			case "Корзина":
+				commandimpl.Contacts(bot.Bot, update)
+
+			default:
+				commandimpl.Undefined(userMap, bot.Bot, update)
+
+			}
+		case domain.Location_CartMenu:
+			switch update.Message.Text {
+
+			case "Каталог одежды🥼":
+				commandimpl.Catalog(userMap, bot.Bot, update)
+
+			case "◀️Назад":
+				commandimpl.Back(userMap, bot.Bot, update)
+
 			default:
 				commandimpl.Undefined(userMap, bot.Bot, update)
 
