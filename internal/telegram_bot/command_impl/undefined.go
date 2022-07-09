@@ -8,7 +8,7 @@ import (
 )
 
 func Undefined(userMap map[int64]domain.Location, bot *tgbotapi.BotAPI, update tgbotapi.Update) {
-	msg := tgbotapi.NewMessage(update.Message.Chat.ID, "For start send `/start` in chat")
+	msg := tgbotapi.NewMessage(update.Message.Chat.ID, "/start")
 	msg.ReplyMarkup = domain.StartKeyboard
 	if _, err := bot.Send(msg); err != nil {
 		log.WithError(err).Errorf(domain.ErrCommand_Init.Error(), "undefined")
