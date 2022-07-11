@@ -115,4 +115,13 @@ var (
 			tgbotapi.NewKeyboardButton("Главное меню"),
 		),
 	)
+	// Добавить товар в корзину
+	AddProductinCartKeyboard = tgbotapi.NewReplyKeyboard(
+		tgbotapi.NewKeyboardButtonRow(
+			tgbotapi.NewKeyboardButton("Добавить в корзину"),
+		),
+		tgbotapi.NewKeyboardButtonRow(
+			tgbotapi.NewKeyboardButton("◀️Назад"),
+		),
+	)
 )

@@ -15,4 +15,5 @@ var (
 	Location_AcceptDelivery   Location = "AcceptDelivery"
 	Location_Support          Location = "Support"
 	Location_CartMenu         Location = "CartMenu"
+	Location_AddProductInCart Location = "AddProductInCart"
 )

@@ -133,7 +133,7 @@ func (bot *Telegrambot) InitHandler(cfg domain.Config, dbu *db_usecase.DataBaseU
 				commandimpl.DeliveryPoint(userMap, bot.Bot, update)
 
 			case "Доставка по адресу":
-				commandimpl.DeliveryCourier(userMap, bot.Bot, update)
+				commandimpl.DeliveryCourier(userMap, bot.Bot, update, dbu)
 
 			case "◀️Назад":
 				commandimpl.Back(userMap, bot.Bot, update)
@@ -152,6 +152,9 @@ func (bot *Telegrambot) InitHandler(cfg domain.Config, dbu *db_usecase.DataBaseU
 
 			case "Главное меню":
 				commandimpl.BackToMenu(userMap, bot.Bot, update)
+
+			case "Добавить в корзину 11":
+				commandimpl.AddProductInCart(userMap, bot.Bot, update, dbu, update.Message.Text)
 
 			default:
 				commandimpl.Undefined(userMap, bot.Bot, update)

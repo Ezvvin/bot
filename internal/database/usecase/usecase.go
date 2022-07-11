@@ -27,10 +27,13 @@ func (dbu *DataBaseUsecase) AddCart(c domain.Cart) {
 	}
 	dbu.Carts = append(dbu.Carts, c)
 }
-// func (dbu *DataBaseUsecase) UpdateUserCart(domain.User)
-// 	for _, user := range dbu.Users{
-
-// 	}
+func (dbu *DataBaseUsecase) UpdateUserCart(p domain.Product, id int) {
+	for _, cart := range dbu.Carts {
+		if cart.Id == id {
+			cart.AddProduct(p)
+		}
+	}
+}
 
 //TODO добавить апдейт юзера для записи данных для номера телефона
 //TODO добавить метод получение корзины юзера из бд
