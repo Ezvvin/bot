@@ -20,6 +20,7 @@ func AddProductInCart(userMap map[int64]domain.Location, bot *tgbotapi.BotAPI, u
 		log.WithError(err).Errorf(domain.ErrCommand_Init.Error(), "addproductbutton")
 		return
 	}
+	log.WithField("productId", productId).Debug()
 
 	product := db_domain.Product{}
 	flag := false
@@ -29,13 +30,14 @@ func AddProductInCart(userMap map[int64]domain.Location, bot *tgbotapi.BotAPI, u
 			flag = true
 		}
 	}
-
+	
 	if !flag {
 		msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Товара нет в наличии")
 		msg.ReplyMarkup = domain.MainMenuKeyboard
 		return
 	}
-
+	log.WithField("product in Flag", product).Debug()
+	
 	msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Товар добавлен в корзину")
 	msg.ReplyMarkup = domain.MainMenuKeyboard
 	dbu.UpdateUserCart(product, int(update.Message.From.ID))
