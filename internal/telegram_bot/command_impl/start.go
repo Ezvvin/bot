@@ -17,16 +17,16 @@ func Start(userMap map[int64]domain.Location, bot *tgbotapi.BotAPI, update tgbot
 		log.WithError(err).Errorf(domain.ErrCommand_Init.Error(), "start")
 	}
 	userMap[update.Message.From.ID] = domain.Location_MainMenu
+	cart := db_domain.Cart{Id: int(update.Message.From.ID)}
 	user := db_domain.User{
 		Id:        int(update.Message.From.ID),
+		UserCart:  cart,
 		Username:  update.Message.From.UserName,
 		FirstName: update.Message.From.FirstName,
 		LastName:  update.Message.From.LastName,
 	}
-	cart := db_domain.Cart{
-		Id:   int(update.Message.From.ID),
-		User: user,
-	}
 	dbu.AddUser(user)
 	dbu.AddCart(cart)
+	log.WithField("cart", dbu.Carts).Debug("список корзин")
+	log.WithField("user", dbu.Users).Debug("список юзеров")
 }

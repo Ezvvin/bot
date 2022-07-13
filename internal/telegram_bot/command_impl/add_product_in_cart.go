@@ -20,7 +20,7 @@ func AddProductInCart(userMap map[int64]domain.Location, bot *tgbotapi.BotAPI, u
 		log.WithError(err).Errorf(domain.ErrCommand_Init.Error(), "addproductbutton")
 		return
 	}
-	log.WithField("productId", productId).Debug()
+	log.WithField("productId", productId).Debug("ловим айди продукта")
 
 	product := db_domain.Product{}
 	flag := false
@@ -30,23 +30,25 @@ func AddProductInCart(userMap map[int64]domain.Location, bot *tgbotapi.BotAPI, u
 			flag = true
 		}
 	}
-	
+
 	if !flag {
 		msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Товара нет в наличии")
 		msg.ReplyMarkup = domain.MainMenuKeyboard
 		return
 	}
-	log.WithField("product", product).Debug("product in cart")
-	
+	log.WithField("product", product).Debug("находим продукт по айди")
+	log.WithField("Users", dbu.Users).Debug("смотрю шо происходит в юзере")
 	msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Товар добавлен в корзину")
 	msg.ReplyMarkup = domain.MainMenuKeyboard
-	dbu.UpdateUserCart(product, int(update.Message.From.ID))
+	// dbu.UpdateUserCart(product, int(update.Message.From.ID))
+	cart1 := db_domain.Cart{Id: int(update.Message.From.ID)}
+	cart1.AddProduct(product)
 	if _, err := bot.Send(msg); err != nil {
 		log.WithError(err).Errorf(domain.ErrCommand_Init.Error(), "addproductbutton")
 		return
 	}
-	userMap[update.Message.From.ID] = domain.Location_AddProductInCart
+	userMap[update.Message.From.ID] = domain.Location_MainMenu
 
-	log.WithField("product cart", dbu.Carts).Debug()
+	log.WithField("product cart", dbu.Users).Debug()
 
 }

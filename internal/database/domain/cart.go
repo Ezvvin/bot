@@ -2,7 +2,6 @@ package domain
 
 type Cart struct {
 	Id         int // for now use user id
-	User       User
 	Products   []Product
 	TotalPrice int
 }
