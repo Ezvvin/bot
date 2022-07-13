@@ -36,7 +36,7 @@ func AddProductInCart(userMap map[int64]domain.Location, bot *tgbotapi.BotAPI, u
 		msg.ReplyMarkup = domain.MainMenuKeyboard
 		return
 	}
-	log.WithField("product in Flag", product).Debug()
+	log.WithField("product", product).Debug("product in cart")
 	
 	msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Товар добавлен в корзину")
 	msg.ReplyMarkup = domain.MainMenuKeyboard
