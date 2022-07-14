@@ -27,6 +27,5 @@ func Start(userMap map[int64]domain.Location, bot *tgbotapi.BotAPI, update tgbot
 	}
 	dbu.AddUser(user)
 	dbu.AddCart(cart)
-	log.WithField("cart", dbu.Carts).Debug("список корзин")
-	log.WithField("user", dbu.Users).Debug("список юзеров")
+
 }
