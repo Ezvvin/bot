@@ -40,9 +40,7 @@ func AddProductInCart(userMap map[int64]domain.Location, bot *tgbotapi.BotAPI, u
 	log.WithField("Users", dbu.Users).Debug("смотрю шо происходит в юзере")
 	msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Товар добавлен в корзину")
 	msg.ReplyMarkup = domain.MainMenuKeyboard
-	// dbu.UpdateUserCart(product, int(update.Message.From.ID))
-	cart1 := db_domain.Cart{Id: int(update.Message.From.ID)}
-	cart1.AddProduct(product)
+	dbu.UpdateUserCart(product, int(update.Message.From.ID))
 	if _, err := bot.Send(msg); err != nil {
 		log.WithError(err).Errorf(domain.ErrCommand_Init.Error(), "addproductbutton")
 		return

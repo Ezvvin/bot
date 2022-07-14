@@ -27,9 +27,9 @@ func (dbu *DataBaseUsecase) AddCart(c domain.Cart) {
 	}
 	dbu.Carts = append(dbu.Carts, c)
 }
-func (dbu *DataBaseUsecase) UpdateUserCart(p domain.Product, id int) {
+func (dbu *DataBaseUsecase) UpdateUserCart(p domain.Product, id domain.User) {
 	for _, cart := range dbu.Carts {
-		if cart.Id == id {
+		if cart.Id == id.UserCart.Id {
 			cart.AddProduct(p)
 		}
 	}
