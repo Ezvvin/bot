@@ -1,9 +1,9 @@
 package domain
 
 type Cart struct {
-	Id         int // for now use user id
-	Products   []Product
-	TotalPrice int
+	Id         int 			// айди корзины (такой же как и айди юзера)
+	Products   []Product  	// список продуктов
+	TotalPrice int			// общая стоимость товаров в корзине
 }
 
 func (c *Cart) CalculateTP() int {

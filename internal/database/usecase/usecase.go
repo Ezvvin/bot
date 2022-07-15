@@ -3,8 +3,8 @@ package usecase
 import "bot/internal/database/domain"
 
 type DataBaseUsecase struct {
-	Users []domain.User
-	Carts []domain.Cart
+	Users []domain.User //база данных в которой находятся все юзеры
+	Carts []domain.Cart //база данных в которой находятся все корзины
 }
 
 func InitDataBaseUsecase() *DataBaseUsecase {
@@ -27,10 +27,20 @@ func (dbu *DataBaseUsecase) AddCart(c domain.Cart) {
 	}
 	dbu.Carts = append(dbu.Carts, c)
 }
-func (dbu *DataBaseUsecase) UpdateUserCart(p domain.Product, id domain.User) {
-	for _, cart := range dbu.Carts {
-		if cart.Id == id.UserCart.Id {
-			cart.AddProduct(p)
+func (dbu *DataBaseUsecase) UpdateCart(c domain.Cart) {
+	for i, cart := range dbu.Carts {
+		if c.Id == cart.Id {
+			cart = c
+			dbu.Carts = append(dbu.Carts, dbu.Carts[i:]...)
+			return
+		}
+
+	}
+}
+func (dbu *DataBaseUsecase) UpdateUser(u domain.User, id int) {
+	for _, user := range dbu.Users {
+		if user.Id == id {
+			user = u
 		}
 	}
 }
