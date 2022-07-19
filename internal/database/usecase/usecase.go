@@ -3,8 +3,8 @@ package usecase
 import "bot/internal/database/domain"
 
 type DataBaseUsecase struct {
-	Users []domain.User
-	Carts []domain.Cart
+	Users []domain.User //база данных в которой находятся все юзеры
+	Carts []domain.Cart //база данных в которой находятся все корзины
 }
 
 func InitDataBaseUsecase() *DataBaseUsecase {

@@ -51,6 +51,7 @@ func AddProductInCart(userMap map[int64]domain.Location, bot *tgbotapi.BotAPI, u
 	userMap[update.Message.From.ID] = domain.Location_MainMenu
 
 	log.WithField("users", user).Debug()
-	log.WithField("users", user.UserCart).Debug()
+	log.WithField("users", dbu.Users).Debug()
+	log.WithField("users", dbu.Carts).Debug()
 
 }
