@@ -43,13 +43,12 @@ var (
 		),
 		tgbotapi.NewKeyboardButtonRow(
 			tgbotapi.NewKeyboardButton("◀️Назад"),
-			tgbotapi.NewKeyboardButton("Главное меню"),
 		),
 	)
 	// Меню информации о худи
-	InfoHoodieKeyboard = tgbotapi.NewReplyKeyboard(
+	AddProductKeyboard = tgbotapi.NewReplyKeyboard(
 		tgbotapi.NewKeyboardButtonRow(
-			tgbotapi.NewKeyboardButton("Выбрать размер📏"),
+			tgbotapi.NewKeyboardButton("Добавить в корзину"),
 		),
 		tgbotapi.NewKeyboardButtonRow(
 			tgbotapi.NewKeyboardButton("◀️Назад"),
@@ -67,6 +66,13 @@ var (
 		tgbotapi.NewKeyboardButtonRow(
 			tgbotapi.NewKeyboardButton("◀️Назад"),
 			tgbotapi.NewKeyboardButton("Главное меню"),
+		),
+	)
+	// Возвращение после добавление товара в заказ
+	BackFromAddProductKeyboard = tgbotapi.NewReplyKeyboard(
+		tgbotapi.NewKeyboardButtonRow(
+			tgbotapi.NewKeyboardButton("Главное меню"),
+			tgbotapi.NewKeyboardButton("Корзина"),
 		),
 	)
 	// меню доставки

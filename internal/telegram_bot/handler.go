@@ -90,16 +90,13 @@ func (bot *Telegrambot) InitHandler(cfg domain.Config, dbu *db_usecase.DataBaseU
 			case "◀️Назад":
 				commandimpl.Back(userMap, bot.Bot, update)
 
-			case "Главное меню":
-				commandimpl.BackToMenu(userMap, bot.Bot, update)
-
 			default:
 				commandimpl.Undefined(userMap, bot.Bot, update)
 			}
 		case domain.Location_HoodyColorMenu:
 			switch update.Message.Text {
 
-			case "Выбрать размер📏":
+			case "Добавить в корзину":
 				commandimpl.SizeHoodie(userMap, bot.Bot, update)
 
 			case "◀️Назад":
@@ -125,6 +122,14 @@ func (bot *Telegrambot) InitHandler(cfg domain.Config, dbu *db_usecase.DataBaseU
 
 			default:
 				commandimpl.Undefined(userMap, bot.Bot, update)
+			}
+		case domain.Location_AddProduct:
+			switch update.Message.Text {
+			case "Главное меню":
+				commandimpl.BackToMenu(userMap, bot.Bot, update)
+			case "Корзина":
+				commandimpl.CartMenu(userMap, bot.Bot, update, cfg, dbu)
+
 			}
 		case domain.Location_Delivery:
 			switch update.Message.Text {

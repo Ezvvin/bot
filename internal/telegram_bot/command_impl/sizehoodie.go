@@ -9,7 +9,7 @@ import (
 )
 
 func SizeHoodie(userMap map[int64]domain.Location, bot *tgbotapi.BotAPI, update tgbotapi.Update) {
-	msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Выберите нужный вам размер:")
+	msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Для добавления товара в корзину, выберите пожалуйста, нужный вам размер:")
 	msg.ReplyMarkup = domain.SizeHoodieKeyboard
 	if _, err := bot.Send(msg); err != nil {
 		log.WithError(err).Errorf(domain.ErrCommand_Init.Error(), "Sizehoodiebutton")
