@@ -6,12 +6,13 @@ type DataBaseUsecase struct {
 	Users []domain.User //база данных в которой находятся все юзеры
 	Carts []domain.Cart //база данных в которой находятся все корзины
 }
-
-func InitDataBaseUsecase() *DataBaseUsecase { // создание бд
+// создание бд
+func InitDataBaseUsecase() *DataBaseUsecase {
 	dbu := new(DataBaseUsecase)
 	return dbu
 }
-func (dbu *DataBaseUsecase) AddUser(u domain.User) { // создание нового юзера в бд
+// создание нового юзера в бд
+func (dbu *DataBaseUsecase) AddUser(u domain.User) {
 	for _, user := range dbu.Users {
 		if u.Id == user.Id {
 			return
@@ -19,7 +20,8 @@ func (dbu *DataBaseUsecase) AddUser(u domain.User) { // создание нов�
 	}
 	dbu.Users = append(dbu.Users, u)
 }
-func (dbu *DataBaseUsecase) AddCart(c domain.Cart) { // создание новой корзины в бд
+// создание новой корзины в бд
+func (dbu *DataBaseUsecase) AddCart(c domain.Cart) {
 	for _, cart := range dbu.Carts {
 		if c.Id == cart.Id {
 			return
@@ -27,7 +29,8 @@ func (dbu *DataBaseUsecase) AddCart(c domain.Cart) { // создание нов�
 	}
 	dbu.Carts = append(dbu.Carts, c)
 }
-func (dbu *DataBaseUsecase) UpdateUserCart(p domain.Product, user domain.User) { // апдейт  корзиныв бд
+// апдейт  корзиныв бд
+func (dbu *DataBaseUsecase) UpdateUserCart(p domain.Product, user domain.User) {
 	for i, cart := range dbu.Carts {
 		if cart.Id == user.UserCart.Id {
 			cart.AddProduct(p)
@@ -35,7 +38,8 @@ func (dbu *DataBaseUsecase) UpdateUserCart(p domain.Product, user domain.User) {
 		}
 	}
 }
-func (dbu *DataBaseUsecase) UpdateUser(u domain.User) { // апдейт корзины в  бд юбзеров
+// апдейт корзины в  бд юбзеров
+func (dbu *DataBaseUsecase) UpdateUser(u domain.User) { 
 	for i, user := range dbu.Users {
 		if user.Id == u.Id {
 			user.UserCart = dbu.Carts[i]
