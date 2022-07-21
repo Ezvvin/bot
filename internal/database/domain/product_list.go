@@ -21,6 +21,12 @@ var (
 			Size:      ProductSize_L,
 		},
 		{
+			ProductId: 14,
+			Name:      "White Hoodie",
+			Price:     3500,
+			Size:      ProductSize_XL,
+		},
+		{
 			ProductId: 21,
 			Name:      "Black Hoodie",
 			Price:     3500,
@@ -37,6 +43,12 @@ var (
 			Name:      "Black Hoodie",
 			Price:     3500,
 			Size:      ProductSize_L,
+		},
+		{
+			ProductId: 24,
+			Name:      "Black Hoodie",
+			Price:     3500,
+			Size:      ProductSize_XL,
 		},
 	}
 )
