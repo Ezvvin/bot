@@ -27,10 +27,10 @@ var (
 	// Меню корзины
 	CartMenuKeyboard = tgbotapi.NewReplyKeyboard(
 		tgbotapi.NewKeyboardButtonRow(
-			tgbotapi.NewKeyboardButton("◀️Назад"),
+			tgbotapi.NewKeyboardButton("Каталог одежды🥼"),
 		),
 		tgbotapi.NewKeyboardButtonRow(
-			tgbotapi.NewKeyboardButton("Каталог одежды🥼"),
+			tgbotapi.NewKeyboardButton("◀️Назад"),
 		),
 	)
 	// Меню выбора худи
