@@ -59,7 +59,7 @@ func (bot *Telegrambot) InitHandler(cfg domain.Config, dbu *db_usecase.DataBaseU
 				commandimpl.Contacts(bot.Bot, update)
 
 			case "Корзина":
-				commandimpl.CartMenu(userMap, bot.Bot, update, dbu)
+				commandimpl.CartMenu(userMap, bot.Bot, update, cfg, dbu)
 
 			default:
 				commandimpl.Undefined(userMap, bot.Bot, update)
@@ -114,7 +114,7 @@ func (bot *Telegrambot) InitHandler(cfg domain.Config, dbu *db_usecase.DataBaseU
 		case domain.Location_SizeHoodie:
 			switch update.Message.Text {
 
-			case "S-46 (EUR)", "M-48 (EUR)", "L-50 (EUR)":
+			case "S-46 (EUR)", "M-48 (EUR)", "L-50 (EUR)", "XL-52 (EUR)":
 				commandimpl.Delivery(userMap, bot.Bot, update)
 
 			case "◀️Назад":

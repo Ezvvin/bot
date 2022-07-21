@@ -48,6 +48,7 @@ func AddProductInCart(userMap map[int64]domain.Location, bot *tgbotapi.BotAPI, u
 		log.WithError(err).Errorf(domain.ErrCommand_Init.Error(), "addproductbutton")
 		return
 	}
+
 	userMap[update.Message.From.ID] = domain.Location_MainMenu
 
 	log.WithField("user", user).Debug()
