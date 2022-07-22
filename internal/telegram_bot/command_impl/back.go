@@ -20,7 +20,7 @@ func Back(userMap map[int64]domain.Location, bot *tgbotapi.BotAPI, update tgbota
 		}
 		userMap[update.Message.From.ID] = domain.Location_MainMenu
 
-	case domain.Location_HoodyColorMenu:
+	case domain.Location_BlackHoodieMenu:
 		msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Вы вернулись в каталог!")
 		msg.ReplyMarkup = domain.HoodyMenuKeyboard
 
@@ -29,7 +29,25 @@ func Back(userMap map[int64]domain.Location, bot *tgbotapi.BotAPI, update tgbota
 		}
 		userMap[update.Message.From.ID] = domain.Location_HoodyCatalogMenu
 
-	case domain.Location_SizeHoodie:
+	case domain.Location_WhiteHoodieMenu:
+		msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Вы вернулись в каталог!")
+		msg.ReplyMarkup = domain.HoodyMenuKeyboard
+
+		if _, err := bot.Send(msg); err != nil {
+			log.WithError(err).Errorf(domain.ErrCommand_Init.Error(), "backbutton")
+		}
+		userMap[update.Message.From.ID] = domain.Location_HoodyCatalogMenu
+
+	case domain.Location_BlackSizeHoodie:
+		msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Вы вернулись в каталог!")
+		msg.ReplyMarkup = domain.HoodyMenuKeyboard
+
+		if _, err := bot.Send(msg); err != nil {
+			log.WithError(err).Errorf(domain.ErrCommand_Init.Error(), "backbutton")
+		}
+		userMap[update.Message.From.ID] = domain.Location_HoodyCatalogMenu
+
+	case domain.Location_WhiteSizeHoodie:
 		msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Вы вернулись в каталог!")
 		msg.ReplyMarkup = domain.HoodyMenuKeyboard
 
@@ -39,12 +57,12 @@ func Back(userMap map[int64]domain.Location, bot *tgbotapi.BotAPI, update tgbota
 		userMap[update.Message.From.ID] = domain.Location_HoodyCatalogMenu
 
 	case domain.Location_Delivery:
-		msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Вы вернулись к выбору размера:")
+		msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Вы вернулись в каталог!")
 		msg.ReplyMarkup = domain.SizeHoodieKeyboard
 		if _, err := bot.Send(msg); err != nil {
 			log.WithError(err).Errorf(domain.ErrCommand_Init.Error(), "backbutton")
 		}
-		userMap[update.Message.From.ID] = domain.Location_SizeHoodie
+		userMap[update.Message.From.ID] = domain.Location_HoodyCatalogMenu
 
 	case domain.Location_DeliveryCourier:
 		msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Вы вернулись к выбору доставки:")

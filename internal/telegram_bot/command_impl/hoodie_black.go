@@ -16,5 +16,5 @@ func BlackHoodieCommand(userMap map[int64]domain.Location, bot *tgbotapi.BotAPI,
 	if _, err := bot.Send(msg); err != nil {
 		log.WithError(err).Errorf(domain.ErrCommand_Init.Error(), "blackhoodiebutton")
 	}
-	userMap[update.Message.From.ID] = domain.Location_HoodyColorMenu
+	userMap[update.Message.From.ID] = domain.Location_BlackHoodieMenu
 }

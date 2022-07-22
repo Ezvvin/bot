@@ -93,7 +93,7 @@ func (bot *Telegrambot) InitHandler(cfg domain.Config, dbu *db_usecase.DataBaseU
 			default:
 				commandimpl.Undefined(userMap, bot.Bot, update)
 			}
-		case domain.Location_HoodyColorMenu:
+		case domain.Location_WhiteHoodieMenu:
 			switch update.Message.Text {
 
 			case "Добавить в корзину":
@@ -108,11 +108,41 @@ func (bot *Telegrambot) InitHandler(cfg domain.Config, dbu *db_usecase.DataBaseU
 			default:
 				commandimpl.Undefined(userMap, bot.Bot, update)
 			}
-		case domain.Location_SizeHoodie:
+		case domain.Location_BlackHoodieMenu:
+			switch update.Message.Text {
+
+			case "Добавить в корзину":
+				commandimpl.SizeHoodie(userMap, bot.Bot, update)
+
+			case "◀️Назад":
+				commandimpl.Back(userMap, bot.Bot, update)
+
+			case "Главное меню":
+				commandimpl.BackToMenu(userMap, bot.Bot, update)
+
+			default:
+				commandimpl.Undefined(userMap, bot.Bot, update)
+			}
+		case domain.Location_BlackSizeHoodie:
 			switch update.Message.Text {
 
 			case "S-46 (EUR)", "M-48 (EUR)", "L-50 (EUR)", "XL-52 (EUR)":
-				commandimpl.Delivery(userMap, bot.Bot, update)
+				commandimpl.NewOrder(userMap, bot.Bot, update, dbu, update.Message.Text)
+
+			case "◀️Назад":
+				commandimpl.Back(userMap, bot.Bot, update)
+
+			case "Главное меню":
+				commandimpl.BackToMenu(userMap, bot.Bot, update)
+
+			default:
+				commandimpl.Undefined(userMap, bot.Bot, update)
+			}
+		case domain.Location_WhiteSizeHoodie:
+			switch update.Message.Text {
+
+			case "S-46 (EUR)", "M-48 (EUR)", "L-50 (EUR)", "XL-52 (EUR)":
+				commandimpl.NewOrder(userMap, bot.Bot, update, dbu, update.Message.Text)
 
 			case "◀️Назад":
 				commandimpl.Back(userMap, bot.Bot, update)

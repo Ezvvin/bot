@@ -11,7 +11,33 @@ import (
 func BackToMenu(userMap map[int64]domain.Location, bot *tgbotapi.BotAPI, update tgbotapi.Update) {
 	switch userMap[update.Message.From.ID] {
 
-	case domain.Location_SizeHoodie:
+	case domain.Location_BlackHoodieMenu:
+		msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Вы вернулись в главное меню!")
+		msg.ReplyMarkup = domain.MainMenuKeyboard
+
+		if _, err := bot.Send(msg); err != nil {
+			log.WithError(err).Errorf(domain.ErrCommand_Init.Error(), "back_To_menu_button")
+		}
+		userMap[update.Message.From.ID] = domain.Location_MainMenu
+	case domain.Location_WhiteHoodieMenu:
+		msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Вы вернулись в главное меню!")
+		msg.ReplyMarkup = domain.MainMenuKeyboard
+
+		if _, err := bot.Send(msg); err != nil {
+			log.WithError(err).Errorf(domain.ErrCommand_Init.Error(), "back_To_menu_button")
+		}
+		userMap[update.Message.From.ID] = domain.Location_MainMenu
+
+	case domain.Location_BlackSizeHoodie:
+		msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Вы вернулись в главное меню!")
+		msg.ReplyMarkup = domain.MainMenuKeyboard
+
+		if _, err := bot.Send(msg); err != nil {
+			log.WithError(err).Errorf(domain.ErrCommand_Init.Error(), "back_To_menu_button")
+		}
+		userMap[update.Message.From.ID] = domain.Location_MainMenu
+
+	case domain.Location_WhiteSizeHoodie:
 		msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Вы вернулись в главное меню!")
 		msg.ReplyMarkup = domain.MainMenuKeyboard
 
