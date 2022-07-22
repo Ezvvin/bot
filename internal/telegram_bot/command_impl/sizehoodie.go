@@ -14,12 +14,10 @@ func SizeHoodie(userMap map[int64]domain.Location, bot *tgbotapi.BotAPI, update 
 	if _, err := bot.Send(msg); err != nil {
 		log.WithError(err).Errorf(domain.ErrCommand_Init.Error(), "Sizehoodiebutton")
 	}
-	log.WithField("карта", userMap).Debug("где сейчас находится страница")
 	if userMap[update.Message.From.ID] == domain.Location_BlackHoodieMenu {
 	userMap[update.Message.From.ID] = domain.Location_BlackSizeHoodie
 	 }
 	 if userMap[update.Message.From.ID] == domain.Location_WhiteHoodieMenu {
 		userMap[update.Message.From.ID] = domain.Location_WhiteSizeHoodie
 	 }
-	 log.WithField("карта2", userMap).Debug("где сейчас находится страница после нажатия")
 }

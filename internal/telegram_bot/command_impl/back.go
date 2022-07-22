@@ -64,7 +64,7 @@ func Back(userMap map[int64]domain.Location, bot *tgbotapi.BotAPI, update tgbota
 		}
 		userMap[update.Message.From.ID] = domain.Location_HoodyCatalogMenu
 
-	case domain.Location_DeliveryCourier:
+	case domain.Location_SendContact:
 		msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Вы вернулись к выбору доставки:")
 		msg.ReplyMarkup = domain.DeliveryKeyboard
 		if _, err := bot.Send(msg); err != nil {

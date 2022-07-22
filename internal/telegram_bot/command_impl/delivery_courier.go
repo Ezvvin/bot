@@ -10,11 +10,11 @@ import (
 )
 
 func DeliveryCourier(userMap map[int64]domain.Location, bot *tgbotapi.BotAPI, update tgbotapi.Update, dbu *db_usecase.DataBaseUsecase) {
-	msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Доставка курьером")
+	msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Отправьте пожалуйста ваш контакт для связи!")
 	msg.ReplyMarkup = domain.AddProductinCartKeyboard
 	if _, err := bot.Send(msg); err != nil {
 		log.WithError(err).Errorf(domain.ErrCommand_Init.Error(), "deliveryCourierbutton")
 	}
-	userMap[update.Message.From.ID] = domain.Location_DeliveryCourier
+	userMap[update.Message.From.ID] = domain.Location_SendContact
 
 }

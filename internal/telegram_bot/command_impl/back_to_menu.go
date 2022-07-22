@@ -54,7 +54,7 @@ func BackToMenu(userMap map[int64]domain.Location, bot *tgbotapi.BotAPI, update 
 		}
 		userMap[update.Message.From.ID] = domain.Location_MainMenu
 
-	case domain.Location_DeliveryCourier:
+	case domain.Location_SendContact:
 		msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Вы вернулись в главное меню!")
 		msg.ReplyMarkup = domain.MainMenuKeyboard
 		if _, err := bot.Send(msg); err != nil {
@@ -86,5 +86,5 @@ func BackToMenu(userMap map[int64]domain.Location, bot *tgbotapi.BotAPI, update 
 		}
 		userMap[update.Message.From.ID] = domain.Location_MainMenu
 	}
-	
+
 }

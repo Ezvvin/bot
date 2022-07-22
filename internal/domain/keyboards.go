@@ -27,6 +27,9 @@ var (
 	// Меню корзины
 	CartMenuKeyboard = tgbotapi.NewReplyKeyboard(
 		tgbotapi.NewKeyboardButtonRow(
+			tgbotapi.NewKeyboardButton("Сделать заказ"),
+		),
+		tgbotapi.NewKeyboardButtonRow(
 			tgbotapi.NewKeyboardButton("Каталог одежды🥼"),
 		),
 		tgbotapi.NewKeyboardButtonRow(

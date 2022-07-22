@@ -68,6 +68,9 @@ func (bot *Telegrambot) InitHandler(cfg domain.Config, dbu *db_usecase.DataBaseU
 		case domain.Location_CartMenu:
 			switch update.Message.Text {
 
+			case "Сделать заказ":
+				commandimpl.AcceptDelivery(userMap, bot.Bot, update, cfg, dbu)
+
 			case "Каталог одежды🥼":
 				commandimpl.Catalog(userMap, bot.Bot, update)
 
@@ -179,7 +182,7 @@ func (bot *Telegrambot) InitHandler(cfg domain.Config, dbu *db_usecase.DataBaseU
 			default:
 				commandimpl.Undefined(userMap, bot.Bot, update)
 			}
-		case domain.Location_DeliveryCourier:
+		case domain.Location_SendContact:
 			switch update.Message.Text {
 
 			case "◀️Назад":
@@ -189,7 +192,7 @@ func (bot *Telegrambot) InitHandler(cfg domain.Config, dbu *db_usecase.DataBaseU
 				commandimpl.BackToMenu(userMap, bot.Bot, update)
 
 			case "Выберете способ доставки":
-				commandimpl.Delivery(userMap, bot.Bot, update,)
+				commandimpl.Delivery(userMap, bot.Bot, update)
 
 			default:
 				commandimpl.Undefined(userMap, bot.Bot, update)
@@ -198,7 +201,7 @@ func (bot *Telegrambot) InitHandler(cfg domain.Config, dbu *db_usecase.DataBaseU
 			switch update.Message.Text {
 
 			case "Подтвердить заказ":
-				commandimpl.AcceptDelivery(userMap, bot.Bot, update)
+				commandimpl.AcceptDelivery(userMap, bot.Bot, update, cfg, dbu)
 
 			case "◀️Назад":
 				commandimpl.Back(userMap, bot.Bot, update)
