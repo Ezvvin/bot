@@ -188,8 +188,8 @@ func (bot *Telegrambot) InitHandler(cfg domain.Config, dbu *db_usecase.DataBaseU
 			case "Главное меню":
 				commandimpl.BackToMenu(userMap, bot.Bot, update)
 
-			case "Добавить в корзину 11":
-				commandimpl.AddProductInCart(userMap, bot.Bot, update, dbu, update.Message.Text)
+			case "Выберете способ доставки":
+				commandimpl.Delivery(userMap, bot.Bot, update,)
 
 			default:
 				commandimpl.Undefined(userMap, bot.Bot, update)

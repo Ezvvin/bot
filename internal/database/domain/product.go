@@ -1,7 +1,6 @@
 package domain
 
 type Product struct {
-	ProductId int         // айди продукта
 	Name      string      // имя продукта
 	Price     int         // стоимость продукта
 	Size      string  // размер продукта
