@@ -24,11 +24,20 @@ var (
 			tgbotapi.NewKeyboardButton("Поддержка"),
 		),
 	)
-	// Меню корзины
+	// Меню корзины с товарами
 	CartMenuKeyboard = tgbotapi.NewReplyKeyboard(
 		tgbotapi.NewKeyboardButtonRow(
 			tgbotapi.NewKeyboardButton("Сделать заказ"),
 		),
+		tgbotapi.NewKeyboardButtonRow(
+			tgbotapi.NewKeyboardButton("Каталог одежды🥼"),
+		),
+		tgbotapi.NewKeyboardButtonRow(
+			tgbotapi.NewKeyboardButton("◀️Назад"),
+		),
+	)
+	// Меню корзины без товаров
+	CartMenuKeyboardIfNil = tgbotapi.NewReplyKeyboard(
 		tgbotapi.NewKeyboardButtonRow(
 			tgbotapi.NewKeyboardButton("Каталог одежды🥼"),
 		),
@@ -98,7 +107,6 @@ var (
 		),
 		tgbotapi.NewKeyboardButtonRow(
 			tgbotapi.NewKeyboardButton("◀️Назад"),
-			tgbotapi.NewKeyboardButton("Главное меню"),
 		),
 	)
 	// Подтверждени заказа

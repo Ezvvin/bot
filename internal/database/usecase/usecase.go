@@ -6,11 +6,13 @@ type DataBaseUsecase struct {
 	Users []domain.User //база данных в которой находятся все юзеры
 	Carts []domain.Cart //база данных в которой находятся все корзины
 }
+
 // создание бд
 func InitDataBaseUsecase() *DataBaseUsecase {
 	dbu := new(DataBaseUsecase)
 	return dbu
 }
+
 // создание нового юзера в бд
 func (dbu *DataBaseUsecase) AddUser(u domain.User) {
 	for _, user := range dbu.Users {
@@ -20,6 +22,7 @@ func (dbu *DataBaseUsecase) AddUser(u domain.User) {
 	}
 	dbu.Users = append(dbu.Users, u)
 }
+
 // создание новой корзины в бд
 func (dbu *DataBaseUsecase) AddCart(c domain.Cart) {
 	for _, cart := range dbu.Carts {
@@ -29,6 +32,7 @@ func (dbu *DataBaseUsecase) AddCart(c domain.Cart) {
 	}
 	dbu.Carts = append(dbu.Carts, c)
 }
+
 // апдейт  корзиныв бд
 func (dbu *DataBaseUsecase) UpdateUserCart(p domain.Product, user domain.User) {
 	for i, cart := range dbu.Carts {
@@ -38,8 +42,9 @@ func (dbu *DataBaseUsecase) UpdateUserCart(p domain.Product, user domain.User) {
 		}
 	}
 }
+
 // апдейт корзины в  бд юбзеров
-func (dbu *DataBaseUsecase) UpdateUser(u domain.User) { 
+func (dbu *DataBaseUsecase) UpdateUser(u domain.User) {
 	for i, user := range dbu.Users {
 		if user.Id == u.Id {
 			user.UserCart = dbu.Carts[i]
@@ -47,6 +52,7 @@ func (dbu *DataBaseUsecase) UpdateUser(u domain.User) {
 		}
 	}
 }
+
 
 //TODO добавить апдейт юзера для записи данных для номера телефона
 //TODO добавить метод получение корзины юзера из бд ()
