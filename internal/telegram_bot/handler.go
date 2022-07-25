@@ -1,6 +1,7 @@
 package telegrambot
 
 import (
+	db_domain "bot/internal/database/domain"
 	db_usecase "bot/internal/database/usecase"
 	"bot/internal/domain"
 	commandimpl "bot/internal/telegram_bot/command_impl"
@@ -11,6 +12,7 @@ import (
 )
 
 func (bot *Telegrambot) InitHandler(cfg domain.Config, dbu *db_usecase.DataBaseUsecase) {
+
 	log.Debug("Init bot handler")
 	updates := bot.Bot.GetUpdatesChan(bot.UpdateCfg)
 	// Создаем мапу для отслеживания локации пользователя
@@ -23,8 +25,31 @@ func (bot *Telegrambot) InitHandler(cfg domain.Config, dbu *db_usecase.DataBaseU
 		}
 		// проверяем , имеет ли сообщение формат контакта
 		if update.Message.Contact != nil {
-			log.Debug("sos", update.Message.Contact)
-			continue
+			u := db_domain.User{Id: int(update.Message.From.ID)}
+			if userMap[update.Message.From.ID] == domain.Location_SendContact {
+				if update.Message.Contact.PhoneNumber != "" {
+					for i, user := range dbu.Users {
+						if user.Id == u.Id {
+							user.Phone = update.Message.Contact.PhoneNumber
+							dbu.Users[i] = user
+						}
+					}
+				}
+				commandimpl.AcceptDelivery(userMap, bot.Bot, update, cfg, dbu)
+				continue
+			}
+			if userMap[update.Message.From.ID] == domain.Location_DeliveryPoint {
+				if update.Message.Contact.PhoneNumber != "" {
+					for i, user := range dbu.Users {
+						if user.Id == u.Id {
+							user.Phone = update.Message.Contact.PhoneNumber
+							dbu.Users[i] = user
+						}
+					}
+				}
+				commandimpl.AcceptDelivery(userMap, bot.Bot, update, cfg, dbu)
+				continue
+			}
 		}
 		// обратная связь , ждем сообщение от пользователя
 		if userMap[update.Message.From.ID] == domain.Location_Support {
@@ -69,7 +94,7 @@ func (bot *Telegrambot) InitHandler(cfg domain.Config, dbu *db_usecase.DataBaseU
 			switch update.Message.Text {
 
 			case "Сделать заказ":
-				commandimpl.AcceptDelivery(userMap, bot.Bot, update, cfg, dbu)
+				commandimpl.Delivery(userMap, bot.Bot, update)
 
 			case "Каталог одежды🥼":
 				commandimpl.Catalog(userMap, bot.Bot, update)
@@ -168,7 +193,7 @@ func (bot *Telegrambot) InitHandler(cfg domain.Config, dbu *db_usecase.DataBaseU
 			switch update.Message.Text {
 
 			case "Самовывоз":
-				commandimpl.DeliveryPoint(userMap, bot.Bot, update)
+				commandimpl.DeliveryPoint(userMap, bot.Bot, update, dbu)
 
 			case "Доставка по адресу":
 				commandimpl.DeliveryCourier(userMap, bot.Bot, update, dbu)

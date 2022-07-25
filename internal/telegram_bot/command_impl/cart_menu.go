@@ -12,7 +12,6 @@ import (
 
 func CartMenu(userMap map[int64]domain.Location, bot *tgbotapi.BotAPI, update tgbotapi.Update, cfg domain.Config, dbu *db_usecase.DataBaseUsecase) {
 	msg := tgbotapi.NewMessage(update.Message.Chat.ID, "")
-	msg.ReplyMarkup = domain.CartMenuKeyboard
 	u := db_domain.User{Id: int(update.Message.From.ID)}
 	for i, user := range dbu.Users {
 		if user.Id == u.Id {
@@ -21,8 +20,10 @@ func CartMenu(userMap map[int64]domain.Location, bot *tgbotapi.BotAPI, update tg
 	}
 	if u.UserCart.Products == nil {
 		msg.Text = "Ваша корзина пустая!"
+		msg.ReplyMarkup = domain.CartMenuKeyboardIfNil
 	} else {
 		msg.Text = fmt.Sprintf("Ваша корзина:%v", u.UserCart.Products)
+		msg.ReplyMarkup = domain.CartMenuKeyboard
 	}
 	if _, err := bot.Send(msg); err != nil {
 		log.WithError(err).Errorf(domain.ErrCommand_Init.Error(), "cartbutton")

@@ -14,16 +14,18 @@ func AcceptDelivery(userMap map[int64]domain.Location, bot *tgbotapi.BotAPI, upd
 
 	msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Спасибо за заказ! В течении 5 минут наш менеджер свяжется для подтверждения заказа!")
 	msg.ReplyMarkup = domain.MainMenuKeyboard
+	log.WithField("СОХРАНЕНИЕ ДОСТАВКИ", dbu.Users).Debug("ДОСТАВКА В ДБ")
 	u := db_domain.User{Id: int(update.Message.From.ID)}
 	for i, user := range dbu.Users {
 		if user.Id == u.Id {
 			u = dbu.Users[i]
 		}
 	}
+	log.WithField("СОХРАНЕНИЕ ДОСТАВКИ", dbu.Users).Debug("ДОСТАВКА В ДБ")
 	if _, err := bot.Send(msg); err != nil {
 		log.WithError(err).Errorf(domain.ErrCommand_Init.Error(), "accepthoodiebutton")
 	}
-	msg = tgbotapi.NewMessage(cfg.AdminChat, fmt.Sprintf("%s\nНомер телефона:\nЗаказ: %v", update.Message.From.FirstName, u.UserCart.Products))
+	msg = tgbotapi.NewMessage(cfg.AdminChat, fmt.Sprintf("%s\nНомер телефона:%v\nЗаказ: %v\nДоставка: %v", update.Message.From.FirstName, u.Phone, u.UserCart.Products, u.Delivery))
 	if _, err := bot.Send(msg); err != nil {
 		log.WithError(err).Errorf(domain.ErrCommand_Init.Error(), "accepthoodiebutton")
 	}
