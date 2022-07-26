@@ -20,13 +20,15 @@ func AcceptDelivery(userMap map[int64]domain.Location, bot *tgbotapi.BotAPI, upd
 			u = dbu.Users[i]
 		}
 	}
-
+	u.UserCart.CalculateTP()
 	if _, err := bot.Send(msg); err != nil {
 		log.WithError(err).Errorf(domain.ErrCommand_Init.Error(), "accepthoodiebutton")
 	}
-	msg = tgbotapi.NewMessage(cfg.AdminChat, fmt.Sprintf("%s\nНомер телефона: \t%v\nЗаказ: \t%v\nДоставка: \t%v", update.Message.From.FirstName, u.Phone, u.UserCart.Products, u.Delivery))
+	msg = tgbotapi.NewMessage(cfg.AdminChat, fmt.Sprintf("%s\nНомер телефона: \t%v\nЗаказ: \t%v\nДоставка: \t%v\nСумма заказа: \t%v", update.Message.From.FirstName, u.Phone, u.UserCart.Products, u.Delivery, u.UserCart.TotalPrice))
 	if _, err := bot.Send(msg); err != nil {
 		log.WithError(err).Errorf(domain.ErrCommand_Init.Error(), "accepthoodiebutton")
 	}
+	dbu.ClearUserCart(u)
+	dbu.ClearCart(u)
 	userMap[update.Message.From.ID] = domain.Location_MainMenu
 }
