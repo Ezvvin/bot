@@ -24,7 +24,10 @@ func AcceptDelivery(userMap map[int64]domain.Location, bot *tgbotapi.BotAPI, upd
 	if _, err := bot.Send(msg); err != nil {
 		log.WithError(err).Errorf(domain.ErrCommand_Init.Error(), "accepthoodiebutton")
 	}
-	msg = tgbotapi.NewMessage(cfg.AdminChat, fmt.Sprintf("%s\nНомер телефона: \t%v\nЗаказ: \t%v\nДоставка: \t%v\nСумма заказа: \t%v", update.Message.From.FirstName, u.Phone, u.UserCart.Products, u.Delivery, u.UserCart.TotalPrice))
+	msg.ParseMode = "MarkdownV2"
+	update.Message.Chat.HasPrivateForwards = true
+
+	msg = tgbotapi.NewMessage(cfg.AdminChat, fmt.Sprintf("%s\nНомер телефона: \t%v\nЗаказ: \t%v\nДоставка: \t%v\nСумма заказа: \t%v", fmt.Sprintf("[%s] tg://user?id=%v", update.Message.From.FirstName, u.Id), u.Phone, u.UserCart.Products, u.Delivery, u.UserCart.TotalPrice))
 	if _, err := bot.Send(msg); err != nil {
 		log.WithError(err).Errorf(domain.ErrCommand_Init.Error(), "accepthoodiebutton")
 	}
