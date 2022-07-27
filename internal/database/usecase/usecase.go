@@ -1,6 +1,8 @@
 package usecase
 
-import "bot/internal/database/domain"
+import (
+	"bot/internal/database/domain"
+)
 
 type DataBaseUsecase struct {
 	Users []domain.User //база данных в которой находятся все юзеры
@@ -52,6 +54,7 @@ func (dbu *DataBaseUsecase) UpdateUser(u domain.User) {
 		}
 	}
 }
+
 // Очистка корзины юзера в бд юзеров
 func (dbu *DataBaseUsecase) ClearUserCart(u domain.User) {
 	for i, user := range dbu.Users {
@@ -61,6 +64,7 @@ func (dbu *DataBaseUsecase) ClearUserCart(u domain.User) {
 		}
 	}
 }
+
 // Очистка корзины  в бд корзин
 func (dbu *DataBaseUsecase) ClearCart(u domain.User) {
 	for i, cart := range dbu.Carts {
@@ -70,7 +74,6 @@ func (dbu *DataBaseUsecase) ClearCart(u domain.User) {
 		}
 	}
 }
-
 
 //TODO добавить апдейт юзера для записи данных для номера телефона
 //TODO добавить метод получение корзины юзера из бд ()

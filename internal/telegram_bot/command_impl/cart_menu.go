@@ -5,6 +5,7 @@ import (
 	db_usecase "bot/internal/database/usecase"
 	"bot/internal/domain"
 	"fmt"
+	"strings"
 
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
 	log "github.com/sirupsen/logrus"
@@ -22,7 +23,7 @@ func CartMenu(userMap map[int64]domain.Location, bot *tgbotapi.BotAPI, update tg
 		msg.Text = "Ваша корзина пустая!"
 		msg.ReplyMarkup = domain.CartMenuKeyboardIfNil
 	} else {
-		msg.Text = fmt.Sprintf("Ваша корзина:%v", u.UserCart.Products)
+		msg.Text = strings.ReplaceAll(fmt.Sprintf("Ваша корзина: %v", u.UserCart.Products), "[{", "")
 		msg.ReplyMarkup = domain.CartMenuKeyboard
 	}
 	if _, err := bot.Send(msg); err != nil {

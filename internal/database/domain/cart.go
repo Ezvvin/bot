@@ -14,7 +14,7 @@ func (c *Cart) CalculateTP() int {
 
 	return c.TotalPrice
 }
-// func (c *Cart) PrintCart(cart Products)
+
 // добавление продукта в корзину
 func (c *Cart) AddProduct(p Product) {
 	c.Products = append(c.Products, p)
