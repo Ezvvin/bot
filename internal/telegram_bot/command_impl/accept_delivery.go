@@ -24,10 +24,9 @@ func AcceptDelivery(userMap map[int64]domain.Location, bot *tgbotapi.BotAPI, upd
 	if _, err := bot.Send(msg); err != nil {
 		log.WithError(err).Errorf(domain.ErrCommand_Init.Error(), "accepthoodiebutton")
 	}
-
-	profile := fmt.Sprintf("tg://user?id=%v", u.Id)
-	msg.Entities = update.Message.Entities
-	msg = tgbotapi.NewMessage(cfg.AdminChat, fmt.Sprintf("%s\nНомер телефона: \t%v\nЗаказ: \t%v\nДоставка: \t%v\nСумма заказа: \t%v", profile, u.Phone, u.UserCart.Products, u.Delivery, u.UserCart.TotalPrice))
+	profile := fmt.Sprintf("<a href='tg://user?id=%v'> %s</a>", u.Id, update.Message.From.FirstName)
+	msg = tgbotapi.NewMessage(cfg.AdminChat, fmt.Sprintf("%s\nНомер телефона: %v\nЗаказ: \n%v\nДоставка: %v\nСумма заказа: %v", profile, u.Phone, u.UserCart.Products, u.Delivery, u.UserCart.TotalPrice))
+	msg.ParseMode = "HTML"
 	if _, err := bot.Send(msg); err != nil {
 		log.WithError(err).Errorf(domain.ErrCommand_Init.Error(), "accepthoodiebutton")
 	}
