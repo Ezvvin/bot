@@ -1,11 +1,12 @@
 package domain
 
 type User struct {
-	Id        int    //айди юзера
-	UserCart  Cart   //личная корзина юзера
-	Username  string //никнейм юзера
-	FirstName string //Имя юзера
-	LastName  string //Фамилия юзера
-	Phone     string //Телефон юзера
-	Delivery  string //Адрес юзера
+	Id        int    //Айди пользователя
+	UserCart  Cart   //Личная корзина пользователя
+	UserName  string //Никнейм пользователя
+	FirstName string //Имя пользователя
+	LastName  string //Фамилия пользователя
+	Phone     string //Телефон пользователя
+	Adress    string //Адрес пользователя
+	Delivery  string //Вид доставки пользователя
 }
