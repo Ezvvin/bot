@@ -1,5 +1,6 @@
 loglevel: debug
 adminchat: 
+adminchanel:
 botconfig: 
   token: 
   paytoken:
