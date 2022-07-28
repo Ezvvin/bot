@@ -23,8 +23,8 @@ func (bot *Telegrambot) InitHandler(cfg domain.Config, dbu *db_usecase.DataBaseU
 		if update.Message == nil {
 			continue
 		}
-		// проверяем , имеет ли сообщение формат контакта
 		u := db_domain.User{Id: int(update.Message.From.ID)}
+		// проверяем, имеет ли сообщение формат локации
 		if userMap[update.Message.From.ID] == domain.Location_SendAdress {
 			if update.Message.Location != nil {
 				for i, user := range dbu.Users {
@@ -37,6 +37,7 @@ func (bot *Telegrambot) InitHandler(cfg domain.Config, dbu *db_usecase.DataBaseU
 			commandimpl.AcceptDelivery(userMap, bot.Bot, update, cfg, dbu)
 			continue
 		}
+		// проверяем , имеет ли сообщение формат контакта
 		if update.Message.Contact != nil {
 			// записываем номер в пользователя из доставки курьером
 			if userMap[update.Message.From.ID] == domain.Location_SendContact {
