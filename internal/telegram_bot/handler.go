@@ -17,7 +17,6 @@ func (bot *Telegrambot) InitHandler(cfg domain.Config, dbu *db_usecase.DataBaseU
 	updates := bot.Bot.GetUpdatesChan(bot.UpdateCfg)
 	// Создаем мапу для отслеживания локации пользователя
 	userMap := map[int64]domain.Location{}
-	log.WithField("MAP1", userMap).Debug("MAPAMAPA111")
 	// Проверяем каждое обновление
 	for update := range updates {
 		// Проверяем что сообщение не пустое
@@ -25,8 +24,20 @@ func (bot *Telegrambot) InitHandler(cfg domain.Config, dbu *db_usecase.DataBaseU
 			continue
 		}
 		// проверяем , имеет ли сообщение формат контакта
+		u := db_domain.User{Id: int(update.Message.From.ID)}
+		if userMap[update.Message.From.ID] == domain.Location_SendAdress {
+			if update.Message.Location != nil {
+				for i, user := range dbu.Users {
+					if user.Id == u.Id {
+						user.Adress = db_domain.Adress{Latitude: update.Message.Location.Latitude, Longitude: update.Message.Location.Longitude}
+						dbu.Users[i] = user
+					}
+				}
+			}
+			commandimpl.AcceptDelivery(userMap, bot.Bot, update, cfg, dbu)
+			continue
+		}
 		if update.Message.Contact != nil {
-			u := db_domain.User{Id: int(update.Message.From.ID)}
 			// записываем номер в пользователя из доставки курьером
 			if userMap[update.Message.From.ID] == domain.Location_SendContact {
 				if update.Message.Contact.PhoneNumber != "" {
@@ -37,7 +48,7 @@ func (bot *Telegrambot) InitHandler(cfg domain.Config, dbu *db_usecase.DataBaseU
 						}
 					}
 				}
-				commandimpl.AcceptDelivery(userMap, bot.Bot, update, cfg, dbu)
+				commandimpl.SendLocation(userMap, bot.Bot, update, dbu)
 				continue
 			}
 			// записываем номер в пользователя из доставки самовывозом
@@ -259,7 +270,7 @@ func (bot *Telegrambot) InitHandler(cfg domain.Config, dbu *db_usecase.DataBaseU
 		default:
 			userMap[update.Message.From.ID] = domain.Location_StartMenu
 			switch update.Message.Text {
-				
+
 			case "/start":
 				commandimpl.Start(userMap, bot.Bot, update, dbu)
 			default:

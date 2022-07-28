@@ -101,9 +101,17 @@ var (
 		),
 	)
 	// Запрос контактов
-	DeliveryCourierKeyboard = tgbotapi.NewReplyKeyboard(
+	SendContactKeyboard = tgbotapi.NewReplyKeyboard(
 		tgbotapi.NewKeyboardButtonRow(
 			tgbotapi.NewKeyboardButtonContact("Отправить контакт"),
+		),
+		tgbotapi.NewKeyboardButtonRow(
+			tgbotapi.NewKeyboardButton("◀️Назад"),
+		),
+	)
+	SendLocationKeyboard = tgbotapi.NewReplyKeyboard(
+		tgbotapi.NewKeyboardButtonRow(
+			tgbotapi.NewKeyboardButtonLocation("Отправить локацию"),
 		),
 		tgbotapi.NewKeyboardButtonRow(
 			tgbotapi.NewKeyboardButton("◀️Назад"),
