@@ -10,19 +10,18 @@ import (
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
 )
 
-func DeliveryCourier(userMap map[int64]domain.Location, bot *tgbotapi.BotAPI, update tgbotapi.Update, dbu *db_usecase.DataBaseUsecase) {
+func SendLocation(userMap map[int64]domain.Location, bot *tgbotapi.BotAPI, update tgbotapi.Update, dbu *db_usecase.DataBaseUsecase) {
 	u := db_domain.User{Id: int(update.Message.From.ID)}
 	for i, user := range dbu.Users {
 		if user.Id == u.Id {
-			user.Delivery = "Курьером"
 			dbu.Users[i] = user
 		}
 	}
-	msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Отправьте пожалуйста ваш контакт для связи!")
-	msg.ReplyMarkup = domain.SendContactKeyboard
+	msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Отправьте пожалуйста ваш адрес для доставки!")
+	msg.ReplyMarkup = domain.SendLocationKeyboard
 	if _, err := bot.Send(msg); err != nil {
 		log.WithError(err).Errorf(domain.ErrCommand_Init.Error(), "deliveryCourierbutton")
 	}
-	userMap[update.Message.From.ID] = domain.Location_SendContact
+	userMap[update.Message.From.ID] = domain.Location_SendAdress
 
 }

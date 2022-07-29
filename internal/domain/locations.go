@@ -13,6 +13,7 @@ var (
 	Location_Delivery         Location = "Delivery"
 	Location_DeliveryPoint    Location = "DeliveryPoint"
 	Location_SendContact      Location = "DeliveryCourier"
+	Location_SendAdress       Location = "SendAdress"
 	Location_PayHoodie        Location = "PayHoodie"
 	Location_AcceptDelivery   Location = "AcceptDelivery"
 	Location_Support          Location = "Support"

@@ -23,9 +23,23 @@ func (bot *Telegrambot) InitHandler(cfg domain.Config, dbu *db_usecase.DataBaseU
 		if update.Message == nil {
 			continue
 		}
+		u := db_domain.User{Id: int(update.Message.From.ID)}
+		// проверяем, имеет ли сообщение формат локации
+		if userMap[update.Message.From.ID] == domain.Location_SendAdress {
+			if update.Message.Location != nil {
+				for i, user := range dbu.Users {
+					if user.Id == u.Id {
+						user.Adress = db_domain.Adress{Latitude: update.Message.Location.Latitude, Longitude: update.Message.Location.Longitude}
+						dbu.Users[i] = user
+					}
+				}
+			}
+			commandimpl.AcceptDelivery(userMap, bot.Bot, update, cfg, dbu)
+			continue
+		}
 		// проверяем , имеет ли сообщение формат контакта
 		if update.Message.Contact != nil {
-			u := db_domain.User{Id: int(update.Message.From.ID)}
+			// записываем номер в пользователя из доставки курьером
 			if userMap[update.Message.From.ID] == domain.Location_SendContact {
 				if update.Message.Contact.PhoneNumber != "" {
 					for i, user := range dbu.Users {
@@ -35,9 +49,10 @@ func (bot *Telegrambot) InitHandler(cfg domain.Config, dbu *db_usecase.DataBaseU
 						}
 					}
 				}
-				commandimpl.AcceptDelivery(userMap, bot.Bot, update, cfg, dbu)
+				commandimpl.SendLocation(userMap, bot.Bot, update, dbu)
 				continue
 			}
+			// записываем номер в пользователя из доставки самовывозом
 			if userMap[update.Message.From.ID] == domain.Location_DeliveryPoint {
 				if update.Message.Contact.PhoneNumber != "" {
 					for i, user := range dbu.Users {
@@ -53,7 +68,7 @@ func (bot *Telegrambot) InitHandler(cfg domain.Config, dbu *db_usecase.DataBaseU
 		}
 		// обратная связь , ждем сообщение от пользователя
 		if userMap[update.Message.From.ID] == domain.Location_Support {
-			msgSupport := tgbotapi.NewMessage(cfg.AdminChat, fmt.Sprintf(("ID: %d\nКлиент: %s\nВопрос: %s\n"), update.Message.From.ID, update.Message.From.FirstName, update.Message.Text))
+			msgSupport := tgbotapi.NewMessage(cfg.AdminChat, fmt.Sprintf(("ID: %d\nКлиент: %s\nВопрос: %s\n"), update.Message.From.ID, fmt.Sprintf("<a href='tg://user?id=%v'>%s</a>", update.Message.From.ID, update.Message.From.FirstName), update.Message.Text))
 			if _, err := bot.Bot.Send(msgSupport); err != nil {
 				log.WithError(err).Errorf(domain.ErrCommand_Init.Error(), "supportmsg")
 			}
@@ -67,6 +82,7 @@ func (bot *Telegrambot) InitHandler(cfg domain.Config, dbu *db_usecase.DataBaseU
 
 		}
 		// команды
+
 		switch userMap[update.Message.From.ID] {
 
 		case domain.Location_MainMenu:
@@ -253,10 +269,13 @@ func (bot *Telegrambot) InitHandler(cfg domain.Config, dbu *db_usecase.DataBaseU
 				commandimpl.Undefined(userMap, bot.Bot, update)
 			}
 		default:
+			userMap[update.Message.From.ID] = domain.Location_StartMenu
 			switch update.Message.Text {
 
 			case "/start":
 				commandimpl.Start(userMap, bot.Bot, update, dbu)
+			default:
+				commandimpl.Undefined(userMap, bot.Bot, update)
 			}
 		}
 	}

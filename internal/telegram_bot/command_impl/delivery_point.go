@@ -20,7 +20,7 @@ func DeliveryPoint(userMap map[int64]domain.Location, bot *tgbotapi.BotAPI, upda
 	}
 	sendpoint := tgbotapi.NewLocation(update.Message.Chat.ID, 55.773398, 37.494530)
 	msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Заказ можете забрать по адресу:\nг.Москва, Ул. Мнёвники, д. 10к1")
-	msg.ReplyMarkup = domain.DeliveryCourierKeyboard
+	msg.ReplyMarkup = domain.SendContactKeyboard
 
 	if _, err := bot.Send(msg); err != nil {
 		log.WithError(err).Errorf(domain.ErrCommand_Init.Error(), "deliverypointhoodiebutton")

@@ -21,7 +21,7 @@ func Start(userMap map[int64]domain.Location, bot *tgbotapi.BotAPI, update tgbot
 	user := db_domain.User{
 		Id:        int(update.Message.From.ID),
 		UserCart:  cart,
-		Username:  update.Message.From.UserName,
+		UserName:  update.Message.From.UserName,
 		FirstName: update.Message.From.FirstName,
 		LastName:  update.Message.From.LastName,
 	}
