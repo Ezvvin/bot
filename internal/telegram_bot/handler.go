@@ -22,7 +22,7 @@ func (bot *Telegrambot) InitHandler(cfg domain.Config, dbu *db_usecase.DataBaseU
 		// Проверяем что сообщение не пустое
 		if update.Message == nil {
 			continue
-		}
+		} //de08ae96-caf9-453e-9bd0-47ff8734a985
 		u := db_domain.User{Id: int(update.Message.From.ID)}
 		// проверяем, имеет ли сообщение формат локации
 		if userMap[update.Message.From.ID] == domain.Location_SendAdress {
