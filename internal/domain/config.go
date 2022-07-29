@@ -1,9 +1,11 @@
 package domain
 
 type Config struct {
-	LogLevel  string `default:"DEBUG"`
-	AdminChat int64  `default:""`
-	AdminChanel int64 `default:""`
+	LogLevel    string `default:"DEBUG"`
+	AdminChat   int64  `default:""`
+	AdminChanel int64  `default:""`
+	ApiKeyMap   string `default:""`
+
 	BotConfig BotConfig
 }
 type BotConfig struct {

@@ -8,11 +8,11 @@ import (
 	"strings"
 
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
+	"github.com/jasonwinn/geocoder"
 	log "github.com/sirupsen/logrus"
 )
 
 func AcceptDelivery(userMap map[int64]domain.Location, bot *tgbotapi.BotAPI, update tgbotapi.Update, cfg domain.Config, dbu *db_usecase.DataBaseUsecase) {
-
 	msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Спасибо за заказ! В течении 5 минут наш менеджер свяжется для подтверждения заказа!")
 	msg.ReplyMarkup = domain.MainMenuKeyboard
 	u := db_domain.User{Id: int(update.Message.From.ID)}
@@ -25,8 +25,13 @@ func AcceptDelivery(userMap map[int64]domain.Location, bot *tgbotapi.BotAPI, upd
 	if _, err := bot.Send(msg); err != nil {
 		log.WithError(err).Errorf(domain.ErrCommand_Init.Error(), "accepthoodiebutton")
 	}
+	// переобразование координат в адрес
+	address, err := geocoder.ReverseGeocode(u.Adress.Latitude, u.Adress.Longitude)
+	if err != nil {
+		log.WithField("Geocode", address).Debug("GEOCODEERROR")
+	}
 	profile := fmt.Sprintf("<a href='tg://user?id=%v'>%s</a>", u.Id, update.Message.From.FirstName)
-	msg = tgbotapi.NewMessage(cfg.AdminChat, strings.NewReplacer("[", "", "{", "\n", "}]", "\n", "}", "").Replace(fmt.Sprintf("%s\nТелефон:\n%v\nЗаказ: %v\nДоставка: %v\n Адрес: %v\nСумма заказа: %v", profile, u.Phone, u.UserCart.Products, u.Delivery, u.Adress, u.UserCart.TotalPrice)))
+	msg = tgbotapi.NewMessage(cfg.AdminChat, strings.NewReplacer("[", "", "{", "\n", "}]", "\n", "}", "").Replace(fmt.Sprintf("%s\nТелефон:\n%v\nЗаказ: %v\nДоставка: %v\n Адрес: %s,%s,%s,%s\nСумма заказа: %v", profile, u.Phone, u.UserCart.Products, u.Delivery, address.City, address.Street, address.CountryCode, address.PostalCode, u.UserCart.TotalPrice)))
 	msg.ParseMode = "HTML"
 	if _, err := bot.Send(msg); err != nil {
 		log.WithError(err).Errorf(domain.ErrCommand_Init.Error(), "accepthoodiebutton")
