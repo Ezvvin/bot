@@ -1,7 +1,7 @@
 loglevel: debug
 adminchat: 
 adminchanel:
-apikeymaps: 
+apikeymap: 
 botconfig: 
   token: 
   paytoken:
