@@ -111,9 +111,6 @@ var (
 	)
 	SendLocationKeyboard = tgbotapi.NewReplyKeyboard(
 		tgbotapi.NewKeyboardButtonRow(
-			tgbotapi.NewKeyboardButtonLocation("Отправить локацию"),
-		),
-		tgbotapi.NewKeyboardButtonRow(
 			tgbotapi.NewKeyboardButton("◀️Назад"),
 		),
 	)
