@@ -6,7 +6,6 @@ import (
 	"bot/internal/logger"
 	telegrambot "bot/internal/telegram_bot"
 
-	"github.com/jasonwinn/geocoder"
 	"github.com/jinzhu/configor"
 	log "github.com/sirupsen/logrus"
 )
@@ -24,8 +23,6 @@ func main() {
 	logger.InitLogger()
 	// Установка уровня логгера
 	log.SetLevel(logger.ParseLogLevel(cfg))
-	// apikey яндекс карт
-	geocoder.SetAPIKey(cfg.ApiKeyMap)
 	// Подключаем бота
 	bot, err := telegrambot.InitBot(cfg.BotConfig)
 	if err != nil {

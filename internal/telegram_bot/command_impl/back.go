@@ -71,6 +71,15 @@ func Back(userMap map[int64]domain.Location, bot *tgbotapi.BotAPI, update tgbota
 			log.WithError(err).Errorf(domain.ErrCommand_Init.Error(), "backbutton")
 		}
 		userMap[update.Message.From.ID] = domain.Location_Delivery
+		
+	case domain.Location_SendAdress:
+		msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Вы вернулись в корзину!")
+		msg.ReplyMarkup = domain.CartMenuKeyboard
+
+		if _, err := bot.Send(msg); err != nil {
+			log.WithError(err).Errorf(domain.ErrCommand_Init.Error(), "backbutton")
+		}
+		userMap[update.Message.From.ID] = domain.Location_CartMenu
 
 	case domain.Location_DeliveryPoint:
 		msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Вы вернулись к выбору доставки:")

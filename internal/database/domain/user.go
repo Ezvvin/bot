@@ -7,10 +7,7 @@ type User struct {
 	FirstName string //Имя пользователя
 	LastName  string //Фамилия пользователя
 	Phone     string //Телефон пользователя
-	Adress    Adress //Адрес пользователя
+	Adress    string //Адрес пользователя
 	Delivery  string //Вид доставки пользователя
 }
-type Adress struct {
-	Latitude  float64
-	Longitude float64
-}
+
