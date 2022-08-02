@@ -21,9 +21,9 @@ func (c *Cart) AddProduct(p Product) {
 }
 
 // удаление продукта из корзины
-func (c *Cart) RemoveProduct(p Product) {
-	for i, product := range c.Products {
-		if p == product {
+func (c *Cart) RemoveProduct(index int) {
+	for i := range c.Products {
+		if index == i {
 			c.Products = append(c.Products[:i], c.Products[i+1:]...)
 			return
 		}

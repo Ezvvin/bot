@@ -30,6 +30,9 @@ var (
 			tgbotapi.NewKeyboardButton("Сделать заказ"),
 		),
 		tgbotapi.NewKeyboardButtonRow(
+			tgbotapi.NewKeyboardButton("Удалить товар"),
+		),
+		tgbotapi.NewKeyboardButtonRow(
 			tgbotapi.NewKeyboardButton("Каталог одежды🥼"),
 		),
 		tgbotapi.NewKeyboardButtonRow(
@@ -132,15 +135,6 @@ var (
 		tgbotapi.NewKeyboardButtonRow(
 			tgbotapi.NewKeyboardButton("◀️Назад"),
 			tgbotapi.NewKeyboardButton("Главное меню"),
-		),
-	)
-	// Добавить товар в корзину
-	AddProductinCartKeyboard = tgbotapi.NewReplyKeyboard(
-		tgbotapi.NewKeyboardButtonRow(
-			tgbotapi.NewKeyboardButton("Добавить в корзину 11"),
-		),
-		tgbotapi.NewKeyboardButtonRow(
-			tgbotapi.NewKeyboardButton("◀️Назад"),
 		),
 	)
 )

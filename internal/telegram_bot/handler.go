@@ -6,6 +6,7 @@ import (
 	"bot/internal/domain"
 	commandimpl "bot/internal/telegram_bot/command_impl"
 	"fmt"
+	"strconv"
 
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
 	log "github.com/sirupsen/logrus"
@@ -70,8 +71,33 @@ func (bot *Telegrambot) InitHandler(cfg domain.Config, dbu *db_usecase.DataBaseU
 				continue
 			}
 		}
-		// обратная связь , ждем сообщение от пользователя
+		// обратная связь , ждем номер индекс продукта от пользователя
+		if userMap[update.Message.From.ID] == domain.Location_DeleteProduct {
+			if update.Message.Text == "◀️Назад" {
+				commandimpl.Back(userMap, bot.Bot, update)
+				continue
+			}
+			if update.Message.Text != "" {
+				index, err := strconv.Atoi(update.Message.Text)
+				if err != nil {
+					log.WithError(err).Errorf(domain.ErrCommand_Init.Error(), "Index Product")
+				}
+				for i, user := range dbu.Users {
+					if user.Id == u.Id {
+						user.UserCart.RemoveProduct(index)
+						dbu.Users[i] = user
+					}
+				}
+				commandimpl.CartMenu(userMap, bot.Bot, update, cfg, dbu)
+				continue
+			}
+		}
+		//обратная связь, ждем сообщение от пользователя и отправляем в админ группу
 		if userMap[update.Message.From.ID] == domain.Location_Support {
+			if update.Message.Text == "◀️Назад" {
+				commandimpl.Back(userMap, bot.Bot, update)
+				continue
+			}
 			msgSupport := tgbotapi.NewMessage(cfg.AdminChat, fmt.Sprintf(("ID: %d\nКлиент: %s\nВопрос: %s\n"), update.Message.From.ID, (fmt.Sprintf("<a href='tg://user?id=%v'>%s</a>", update.Message.From.ID, update.Message.From.FirstName)), update.Message.Text))
 			msgSupport.ParseMode = "HTML"
 			if _, err := bot.Bot.Send(msgSupport); err != nil {
@@ -116,6 +142,9 @@ func (bot *Telegrambot) InitHandler(cfg domain.Config, dbu *db_usecase.DataBaseU
 
 			case "Сделать заказ":
 				commandimpl.Delivery(userMap, bot.Bot, update)
+
+			case "Удалить товар":
+				commandimpl.DeleteProduct(userMap, bot.Bot, update, dbu)
 
 			case "Каталог одежды🥼":
 				commandimpl.Catalog(userMap, bot.Bot, update)
@@ -273,7 +302,7 @@ func (bot *Telegrambot) InitHandler(cfg domain.Config, dbu *db_usecase.DataBaseU
 			default:
 				commandimpl.Undefined(userMap, bot.Bot, update)
 			}
-			
+
 		default:
 			userMap[update.Message.From.ID] = domain.Location_StartMenu
 			switch update.Message.Text {
