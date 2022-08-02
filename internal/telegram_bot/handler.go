@@ -84,6 +84,9 @@ func (bot *Telegrambot) InitHandler(cfg domain.Config, dbu *db_usecase.DataBaseU
 				}
 				for i, user := range dbu.Users {
 					if user.Id == u.Id {
+						if i != index {
+							bot.Bot.Send(tgbotapi.NewMessage(update.Message.Chat.ID, "Такого товара нет в вашей корзине"))
+						}
 						user.UserCart.RemoveProduct(index)
 						dbu.Users[i] = user
 					}

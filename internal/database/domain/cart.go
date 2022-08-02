@@ -25,7 +25,6 @@ func (c *Cart) RemoveProduct(index int) {
 	for i := range c.Products {
 		if index == i {
 			c.Products = append(c.Products[:i], c.Products[i+1:]...)
-			return
 		}
 	}
 }
