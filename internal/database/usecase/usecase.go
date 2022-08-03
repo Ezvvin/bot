@@ -35,7 +35,7 @@ func (dbu *DataBaseUsecase) AddCart(c domain.Cart) {
 	dbu.Carts = append(dbu.Carts, c)
 }
 
-// апдейт  корзины в бд
+// обавление продукта в корзину в бд
 func (dbu *DataBaseUsecase) UpdateUserCart(p domain.Product, user domain.User) {
 	for i, cart := range dbu.Carts {
 		if cart.Id == user.UserCart.Id {
@@ -51,6 +51,15 @@ func (dbu *DataBaseUsecase) UpdateUser(u domain.User) {
 		if user.Id == u.Id {
 			user.UserCart = dbu.Carts[i]
 			dbu.Users[i] = user
+		}
+	}
+}
+
+// апдейт корзины в бд корзин
+func (dbu *DataBaseUsecase) UpdateCart(c domain.Cart) {
+	for i, cart := range dbu.Carts {
+		if cart.Id == c.Id {
+			dbu.Carts[i] = c
 		}
 	}
 }
