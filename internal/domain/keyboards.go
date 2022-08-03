@@ -93,10 +93,13 @@ var (
 	// меню доставки
 	DeliveryKeyboard = tgbotapi.NewReplyKeyboard(
 		tgbotapi.NewKeyboardButtonRow(
-			tgbotapi.NewKeyboardButton("Доставка по адресу"),
+			tgbotapi.NewKeyboardButton("Самовывоз"),
 		),
 		tgbotapi.NewKeyboardButtonRow(
-			tgbotapi.NewKeyboardButton("Самовывоз"),
+			tgbotapi.NewKeyboardButton("Курьером СДЭК"),
+		),
+		tgbotapi.NewKeyboardButtonRow(
+			tgbotapi.NewKeyboardButton("На пункт выдачи СДЭК"),
 		),
 		tgbotapi.NewKeyboardButtonRow(
 			tgbotapi.NewKeyboardButton("◀️Назад"),

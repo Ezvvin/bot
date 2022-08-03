@@ -250,8 +250,11 @@ func (bot *Telegrambot) InitHandler(cfg domain.Config, dbu *db_usecase.DataBaseU
 			case "Самовывоз":
 				commandimpl.DeliveryPoint(userMap, bot.Bot, update, dbu)
 
-			case "Доставка по адресу":
+			case "Курьером СДЭК":
 				commandimpl.DeliveryCourier(userMap, bot.Bot, update, dbu)
+
+			case "На пункт выдачи СДЭК":
+				commandimpl.DeliveryPointSdek(userMap, bot.Bot, update, dbu)
 
 			case "◀️Назад":
 				commandimpl.Back(userMap, bot.Bot, update)
