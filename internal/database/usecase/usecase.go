@@ -83,7 +83,3 @@ func (dbu *DataBaseUsecase) ClearCart(u domain.User) {
 		}
 	}
 }
-
-//TODO добавить апдейт юзера для записи данных для номера телефона
-//TODO добавить метод получение корзины юзера из бд ()
-//TODO func update user cart
