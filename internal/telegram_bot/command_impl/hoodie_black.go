@@ -16,12 +16,10 @@ func BlackHoodieCommand(userMap map[int64]domain.Location, bot *tgbotapi.BotAPI,
 	if _, err := bot.Send(msg); err != nil {
 		log.WithError(err).Errorf(domain.ErrCommand_Init.Error(), "blackhoodiebutton")
 	}
-	sticker := tgbotapi.NewSticker(update.Message.Chat.ID, tgbotapi.FilePath("C:/Users/Pavel/bot/src/pictures/black_hoodie/11.png"))
 	image := tgbotapi.NewMediaGroup(msg.ChatID, []interface{}{
-		tgbotapi.NewInputMediaPhoto(tgbotapi.FilePath("C:/Users/Pavel/bot/src/pictures/size/size.jpg"))})
-	if _, err := bot.Send(sticker); err != nil {
-		log.WithError(err).Errorf(domain.ErrCommand_Init.Error(), "whitehoodie")
-	}
+		tgbotapi.NewInputMediaPhoto(tgbotapi.FilePath("./src/pictures/size/size.jpg")),
+		tgbotapi.NewInputMediaPhoto(tgbotapi.FilePath("./src/pictures/black_hoodie/1.png"))})
+
 	if _, err := bot.SendMediaGroup(image); err != nil {
 		log.WithError(err).Errorf(domain.ErrCommand_Init.Error(), "whitehoodie")
 	}
