@@ -11,7 +11,7 @@ import (
 func DeleteProduct(userMap map[int64]domain.Location, bot *tgbotapi.BotAPI, update tgbotapi.Update, dbu *db_usecase.DataBaseUsecase) {
 
 	msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Введите номер строки товара, который желаете удалить из корзины:")
-	msg.ReplyMarkup = domain.SendLocationKeyboard
+	msg.ReplyMarkup = domain.BackLocationKeyboard
 	if _, err := bot.Send(msg); err != nil {
 		log.WithError(err).Errorf(domain.ErrCommand_Init.Error(), "cartbutton")
 	}

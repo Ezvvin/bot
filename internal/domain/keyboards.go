@@ -90,7 +90,7 @@ var (
 			tgbotapi.NewKeyboardButton("Корзина"),
 		),
 	)
-	// меню доставки
+	// меню выбора доставки
 	DeliveryKeyboard = tgbotapi.NewReplyKeyboard(
 		tgbotapi.NewKeyboardButtonRow(
 			tgbotapi.NewKeyboardButton("Самовывоз"),
@@ -115,19 +115,10 @@ var (
 			tgbotapi.NewKeyboardButton("◀️Назад"),
 		),
 	)
-	SendLocationKeyboard = tgbotapi.NewReplyKeyboard(
+	// кнопка назад
+	BackLocationKeyboard = tgbotapi.NewReplyKeyboard(
 		tgbotapi.NewKeyboardButtonRow(
 			tgbotapi.NewKeyboardButton("◀️Назад"),
-		),
-	)
-	// Подтверждени заказа
-	AcceptKeyboard = tgbotapi.NewReplyKeyboard(
-		tgbotapi.NewKeyboardButtonRow(
-			tgbotapi.NewKeyboardButton("Подтвердить заказ"),
-		),
-		tgbotapi.NewKeyboardButtonRow(
-			tgbotapi.NewKeyboardButton("◀️Назад"),
-			tgbotapi.NewKeyboardButton("Главное меню"),
 		),
 	)
 	// Оплата заказа

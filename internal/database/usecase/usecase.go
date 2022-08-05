@@ -3,7 +3,7 @@ package usecase
 import (
 	"bot/internal/database/domain"
 )
-
+// база данных
 type DataBaseUsecase struct {
 	Users []domain.User //база данных в которой находятся все юзеры
 	Carts []domain.Cart //база данных в которой находятся все корзины

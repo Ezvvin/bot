@@ -1,5 +1,5 @@
 package domain
-
+// локации
 type Location string
 
 var (

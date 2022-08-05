@@ -1,5 +1,6 @@
 package domain
 
+// список продуктов
 var (
 	ProductList []Product = []Product{
 		{

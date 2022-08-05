@@ -18,7 +18,7 @@ func SendLocation(userMap map[int64]domain.Location, bot *tgbotapi.BotAPI, updat
 		}
 	}
 	msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Отправьте пожалуйста ваш адрес для доставки!")
-	msg.ReplyMarkup = domain.SendLocationKeyboard
+	msg.ReplyMarkup = domain.BackLocationKeyboard
 	if _, err := bot.Send(msg); err != nil {
 		log.WithError(err).Errorf(domain.ErrCommand_Init.Error(), "deliveryCourierbutton")
 	}
