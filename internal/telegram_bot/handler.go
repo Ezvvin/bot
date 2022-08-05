@@ -31,6 +31,7 @@ func (bot *Telegrambot) InitHandler(cfg domain.Config, dbu *db_usecase.DataBaseU
 				commandimpl.Back(userMap, bot.Bot, update)
 				continue
 			}
+			//если отправлено сообщение, записывает в адрес юзера
 			if update.Message.Text != "" {
 				for i, user := range dbu.Users {
 					if user.Id == u.Id {
@@ -71,23 +72,27 @@ func (bot *Telegrambot) InitHandler(cfg domain.Config, dbu *db_usecase.DataBaseU
 				continue
 			}
 		}
-		// обратная связь , ждем номер индекс продукта от пользователя
+		// удаление продукта из корзины
 		if userMap[update.Message.From.ID] == domain.Location_DeleteProduct {
 			if update.Message.Text == "◀️Назад" {
 				commandimpl.Back(userMap, bot.Bot, update)
 				continue
 			}
+			// ждем индекс продукта (номер строки продукта у пользователя)
 			if update.Message.Text != "" {
+				//конвертируем номер строки продукта у пользователя в индекс продукта
 				index, err := strconv.Atoi(update.Message.Text)
 				if err != nil {
 					log.WithError(err).Errorf(domain.ErrCommand_Init.Error(), "Index Product")
 				}
+				//ищем введенный индекс среди продуктов
 				for i, user := range dbu.Users {
 					if user.Id == u.Id {
 						index -= 1
 						if i != index {
 							bot.Bot.Send(tgbotapi.NewMessage(update.Message.Chat.ID, "Такого товара нет в вашей корзине"))
 						}
+						//удаляем продукт из корзины и обновляем корзину юзера
 						user.UserCart.RemoveProduct(index)
 						dbu.Users[i] = user
 						dbu.UpdateCart(user.UserCart)
@@ -103,11 +108,14 @@ func (bot *Telegrambot) InitHandler(cfg domain.Config, dbu *db_usecase.DataBaseU
 				commandimpl.Back(userMap, bot.Bot, update)
 				continue
 			}
+			//оправляем вопрос в группу 
 			msgSupport := tgbotapi.NewMessage(cfg.AdminChat, fmt.Sprintf(("ID: %d\nКлиент: %s\nВопрос: %s\n"), update.Message.From.ID, (fmt.Sprintf("<a href='tg://user?id=%v'>%s</a>", update.Message.From.ID, update.Message.From.FirstName)), update.Message.Text))
+			//меняем парс мод для ссылки на профиль пользователя
 			msgSupport.ParseMode = "HTML"
 			if _, err := bot.Bot.Send(msgSupport); err != nil {
 				log.WithError(err).Errorf(domain.ErrCommand_Init.Error(), "supportmsg")
 			}
+			//отправляем ответ пользователю
 			msg := tgbotapi.NewMessage(update.Message.Chat.ID, "В ближайшее время с вами свяжется наш менеджер!")
 			msg.ReplyMarkup = domain.MainMenuKeyboard
 			if _, err := bot.Bot.Send(msg); err != nil {
@@ -271,26 +279,14 @@ func (bot *Telegrambot) InitHandler(cfg domain.Config, dbu *db_usecase.DataBaseU
 			case "◀️Назад":
 				commandimpl.Back(userMap, bot.Bot, update)
 
-			case "Главное меню":
-				commandimpl.BackToMenu(userMap, bot.Bot, update)
-
-			case "Выберете способ доставки":
-				commandimpl.Delivery(userMap, bot.Bot, update)
-
 			default:
 				commandimpl.Undefined(userMap, bot.Bot, update)
 			}
 		case domain.Location_DeliveryPoint:
 			switch update.Message.Text {
 
-			case "Подтвердить заказ":
-				commandimpl.AcceptDelivery(userMap, bot.Bot, update, cfg, dbu)
-
 			case "◀️Назад":
 				commandimpl.Back(userMap, bot.Bot, update)
-
-			case "Главное меню":
-				commandimpl.BackToMenu(userMap, bot.Bot, update)
 
 			default:
 				commandimpl.Undefined(userMap, bot.Bot, update)

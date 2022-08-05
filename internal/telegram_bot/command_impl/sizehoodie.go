@@ -15,9 +15,9 @@ func SizeHoodie(userMap map[int64]domain.Location, bot *tgbotapi.BotAPI, update 
 		log.WithError(err).Errorf(domain.ErrCommand_Init.Error(), "Sizehoodiebutton")
 	}
 	if userMap[update.Message.From.ID] == domain.Location_BlackHoodieMenu {
-	userMap[update.Message.From.ID] = domain.Location_BlackSizeHoodie
-	 }
-	 if userMap[update.Message.From.ID] == domain.Location_WhiteHoodieMenu {
+		userMap[update.Message.From.ID] = domain.Location_BlackSizeHoodie
+	}
+	if userMap[update.Message.From.ID] == domain.Location_WhiteHoodieMenu {
 		userMap[update.Message.From.ID] = domain.Location_WhiteSizeHoodie
-	 }
+	}
 }
